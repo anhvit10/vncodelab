@@ -3,12 +3,13 @@ package com.vncodelab.respository;
 
 import com.vncodelab.entity.Lab;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface LabRespository extends CrudRepository<Lab, Long> {
 
-    List<Lab> findByName(String name);
+    Lab findByDocID(String docID);
 
     Lab findById(long id);
 }

@@ -1,9 +1,6 @@
 package com.vncodelab.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Lab {
@@ -12,6 +9,16 @@ public class Lab {
     private long id;
     private String docID;
     private String name;
+    @Column(length=1000000)
+    private String html;
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
+    }
 
     public Lab() {
 
