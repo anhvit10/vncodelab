@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>VN Codelabs</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description"
+          content="Google Developers Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application. They cover a wide range of topics such as Android Wear, Google Compute Engine, Project Tango, and Google APIs on iOS.">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="generator" content="VnCodelab">
+    <meta name="application-name" content="VnCodelab">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#455a64">
+    <meta name="apple-mobile-web-app-title" content="VnCodelab">
+    <meta name="msapplication-TileColor" content="#455a64">
+    <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#455a64">
+    <meta name="og:type" property="og:type" content="website">
+    <meta name="og:title" property="og:title" content="VnCodelab">
+    <meta name="og:description" property="og:description"
+          content="Google Developers Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application. They cover a wide range of topics such as Android Wear, Google Compute Engine, Project Tango, and Google APIs on iOS.">
+    <meta name="og:url" property="og:url" content="https://codelabs.developers.google.com/">
+    <meta name="og:site_name" property="og:site_name" content="VnCodelab">
+    <meta name="og:determiner" property="og:determiner" content="the">
+    <meta name="og:locale" property="og:locale" content="en_US">
+    <meta name="og:image" property="og:image" content="/images/og-image.png">
+    <meta name="og:image:url" property="og:image:url" content="/images/og-image.png">
+    <meta name="og:image:type" property="og:image:type" content="image/png">
+    <meta name="og:image:width" property="og:image:width" content="1200">
+    <meta name="og:image:height" property="og:image:height" content="1200">
+    <meta name="og:image:alt" property="og:image:alt" content="VnCodelab">
+    <meta name="twitter:card" property="twitter:card" content="summary_large_image">
+    <meta name="twitter:domain" property="twitter:domain" content="codelabs.developers.google.com">
+    <meta name="twitter:title" property="twitter:title" content="VnCodelab">
+    <meta name="twitter:site" property="twitter:site" content="@googledevs">
+    <meta name="twitter:creator" property="twitter:creator" content="@googledevs">
+    <meta name="twitter:description" property="twitter:description"
+          content="Google Developers Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application. They cover a wide range of topics such as Android Wear, Google Compute Engine, Project Tango, and Google APIs on iOS.">
+    <meta name="twitter:image" property="twitter:image" content="/images/og-image.png">
+    <meta name="twitter:url" property="twitter:url" content="https://vncodelab.appspot.com/">
+
+
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet"/>
+
+    <script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="../static/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
+
+</head>
+<body id="app" is="body-bind" class="fullbleed" style="padding-top: 0px;">
+<paper-header-panel id="main" mode="standard" main="" at-top="" class="x-scope paper-header-panel-0">
+
+    <div id="mainToolbar" class="paper-header" style="margin-top: 0px;">
+        <div class="site-width layout horizontal">
+            <a href="https://vncodelab.appspot.com/">
+
+                <img src="../static/images/developers-logo.svg" th:src="@{/images/developers-logo.svg}"
+                     class="logo-icon" alt="Google Developers Logo">
+                <img src="../static/images/lockup_developers_light_color.svg"
+                     th:src="@{/images/lockup_developers_light_color.svg}" class="logo-devs"
+                     alt="Google Developers Workmark">
+            </a>
+            <div id="searchbar">
+                <paper-input-container no-label-float="" class="x-scope paper-input-container-0">
+
+                    <template is="dom-if" class="style-scope paper-input-container"></template>
+                    <div class="input-content style-scope paper-input-container">
+                        <paper-icon-button prefix="" icon="search" role="button" tabindex="0" aria-disabled="false"
+                                           class="x-scope paper-icon-button-0">
+                            <iron-icon id="icon" class="style-scope paper-icon-button x-scope iron-icon-0">
+                                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+                                     class="style-scope iron-icon"
+                                     style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                                    <g class="style-scope iron-icon">
+                                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                                              class="style-scope iron-icon"></path>
+                                    </g>
+                                </svg>
+
+                            </iron-icon>
+                        </paper-icon-button>
+                        <div class="label-and-input-container style-scope paper-input-container"
+                             id="labelAndInputContainer">
+                            <label>Tìm Kiếm</label><input is="iron-input">
+                        </div>
+
+                    </div>
+                    <div class="underline style-scope paper-input-container">
+                        <div class="unfocused-line style-scope paper-input-container"></div>
+                        <div class="focused-line style-scope paper-input-container"></div>
+                    </div>
+                    <div class="add-on-content style-scope paper-input-container">
+
+                    </div>
+                </paper-input-container>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainPanel" class="style-scope paper-header-panel">
+        <div id="mainContainer" class="flex style-scope paper-header-panel">
+            <header id="banner">
+                <div class="site-width">
+                    <h2 class="banner-title">Welcome to VnCodelab</h2>
+                    <div class="banner-description">
+                        <p class="banner-info">
+                            Nơi cung cấp các bài hướng dẫn về lập trình. Các bài học được viết theo các dạng các bài
+                            thực hành (Labs) theo bước, giúp bạn dễ dàng làm theo và hiểu hơn về ngôn ngữ hay công nghệ.
+                            <br><a href="https://github.com/googlecodelabs/tools">Tìm hiểu thêm</a>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div id="filters" class="site-width layout horizontal center justified">
+                    <div id="sortby">
+                        <paper-tabs selected="0" noink="" role="tablist" tabindex="0" class="x-scope paper-tabs-0">
+                            <div id="tabsContainer" class="style-scope paper-tabs" style="touch-action: pan-y;">
+                                <div id="tabsContent" class=" fit-container style-scope paper-tabs">
+                                    <paper-tab class="paper-tab-0">Java</paper-tab>
+                                    <paper-tab class="paper-tab-0">Swing</paper-tab>
+                                    <paper-tab class="paper-tab-0">JSP</paper-tab>
+                                    <paper-tab class="paper-tab-0">Servlet</paper-tab>
+                                    <paper-tab class="paper-tab-0">JPA</paper-tab>
+                                    <paper-tab class="paper-tab-0">Hibernate</paper-tab>
+                                    <paper-tab class="paper-tab-0">Spring</paper-tab>
+                                    <paper-tab class="paper-tab-0">Android</paper-tab>
+                                </div>
+                            </div>
+                        </paper-tabs>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> More
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">C</a>
+                            <a class="dropdown-item" href="#">C++</a>
+                            <a class="dropdown-item" href="#">PHP</a>
+                            <a class="dropdown-item" href="#">JavaScript</a>
+                        </div>
+                    </div>
+                </div>
+                <card-sorter id="cards" class="site-width">
+
+                    <a href="#" class="codelab-card category-web">
+                        <h2>Cookie</h2>
+                        <h3>How Cookie works. By default, each request is considered as a new request</h3>
+                        <div class="card-footer">
+                            <div class="category-icon web-icon"></div>
+                            <paper-button class="web-bg">Start</paper-button>
+                        </div>
+                    </a>
+
+                    <a href="#" class="codelab-card category-web">
+                        <h2>Cookie</h2>
+                        <h3>How Cookie works. By default, each request is considered as a new request</h3>
+                        <div class="card-footer">
+                            <div class="category-icon web-icon"></div>
+                            <paper-button class="web-bg">Start</paper-button>
+                        </div>
+                    </a>
+
+                    <a href="#" class="codelab-card category-web">
+                        <h2>Cookie</h2>
+                        <h3>How Cookie works. By default, each request is considered as a new request</h3>
+                        <div class="card-footer">
+                            <div class="category-icon web-icon"></div>
+                            <paper-button class="web-bg">Start</paper-button>
+                        </div>
+                    </a>
+
+                    <a href="#" class="codelab-card category-web">
+                        <h2>Cookie</h2>
+                        <h3>How Cookie works. By default, each request is considered as a new request</h3>
+                        <div class="card-footer">
+                            <div class="category-icon web-icon"></div>
+                            <paper-button class="web-bg">Start</paper-button>
+                        </div>
+                    </a>
+
+                </card-sorter>
+                <div id="loading-placeholder" class="site-width">
+                    Loading Codelabs, please wait...
+                </div>
+            </main>
+            <footer id="footer">
+                <div class="footer-wrapper site-width">
+                    Dự án Codelabs
+                </div>
+            </footer>
+            <div class="footerbar">
+                <div class="site-width layout horizontal center justified">
+                    <span>
+                    <a href="https://developers.google.com/site-terms/">Terms</a>
+                    &nbsp; | &nbsp;
+                    <a href="https://www.google.com/intl/en/privacy/">Privacy</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</paper-header-panel>
+
+</body>
+</html>
