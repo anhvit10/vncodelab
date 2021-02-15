@@ -5,12 +5,21 @@ import javax.persistence.*;
 @Entity
 public class Lab {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private long id;
     private String docID;
     private String name;
-    @Column(length=1000000)
+    private String description;
+    @Column(length = 1000000)
     private String html;
+
+    private int cateID;
+
+    public int getCateID() {
+        return cateID;
+    }
+
+    public void setCateID(int cateID) {
+        this.cateID = cateID;
+    }
 
     public String getHtml() {
         return html;
@@ -24,17 +33,17 @@ public class Lab {
 
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Lab(String docID, String name) {
         this.docID = docID;
         this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getDocID() {

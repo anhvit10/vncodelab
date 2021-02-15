@@ -555,7 +555,8 @@ ul {
 #cards, .codelab-card {
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex
+    display: flex;
+    min-height: 155px;
 }
 
 
@@ -573,6 +574,14 @@ ul {
     margin: 0 16px 16px 0;
     max-width: 330px;
     position: relative
+}
+
+.codelab-card-add {
+    background-color: #eee;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 2px dashed silver;
 }
 
 a.codelab-card:hover {
@@ -1651,77 +1660,6 @@ iron-dropdown {
     padding: 8px 0;
 }
 
-.paper-tab-0 {
-    display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
-    display: inline-flex;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -ms-flex: 1 1 auto;
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
-    cursor: pointer;
-    overflow: hidden;
-    padding: 0 12px;
-    position: relative;
-    vertical-align: middle;
-    -webkit-font-smoothing: antialiased;
-    font-family: Roboto, Noto, sans-serif;
-}
-
-.paper-tab-0:focus {
-    outline: none
-}
-
-.paper-tab-0[link] {
-    padding: 0
-}
-
-.paper-tab-0 .tab-content.paper-tab {
-    -webkit-transform: translateZ(0);
-    height: 100%;
-    transform: translateZ(0);
-    transition: opacity .1s cubic-bezier(.4, 0, 1, 1);
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-direction: row;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -ms-flex: 1 1 auto;
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
-}
-
-.paper-tab-0:not(.iron-selected) > .tab-content.paper-tab {
-    opacity: .8;
-}
-
-.paper-tab-0:focus .tab-content.paper-tab {
-    font-weight: 700;
-    opacity: 1
-}
-
-.paper-tab-0 paper-ripple.paper-tab {
-    color: #ffff8d
-}
-
-.paper-tab-0 .tab-content.paper-tab > a {
-    -ms-flex: 1 1 auto;
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
-    height: 100%
-}
 
 .paper-tabs-0 {
     display: -ms-flexbox;
@@ -1742,106 +1680,7 @@ iron-dropdown {
     user-select: none;
 }
 
-[dir=rtl] .paper-tabs-0,
-.paper-tabs-0[dir=rtl] {
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-direction: row-reverse;
-    -webkit-flex-direction: row-reverse;
-    flex-direction: row-reverse
+.paper-tabs-0 a {
+    padding-left: 20px;
 }
 
-.paper-tabs-0 #tabsContainer.paper-tabs {
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-    white-space: nowrap;
-    -ms-flex: 1 1 auto;
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
-}
-
-.paper-tabs-0 #tabsContent.paper-tabs {
-    -ms-flex-basis: auto;
-    -ms-flex-preferred-size: auto;
-    -webkit-flex-basis: auto;
-    flex-basis: auto;
-    height: 100%;
-}
-
-.paper-tabs-0 #tabsContent.scrollable.paper-tabs {
-    position: absolute;
-    white-space: nowrap
-}
-
-.paper-tabs-0 #tabsContent.scrollable.fit-container.paper-tabs,
-.paper-tabs-0 #tabsContent.paper-tabs:not(.scrollable) {
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -ms-flex-direction: row;
-    -webkit-flex-direction: row;
-    flex-direction: row
-}
-
-.paper-tabs-0 #tabsContent.scrollable.fit-container.paper-tabs {
-    min-width: 100%
-}
-
-.paper-tabs-0 #tabsContent.scrollable.fit-container.paper-tabs > * {
-    -ms-flex: 1 0 auto;
-    -webkit-flex: 1 0 auto;
-    flex: 1 0 auto
-}
-
-.paper-tabs-0 .hidden.paper-tabs {
-    display: none
-}
-
-.paper-tabs-0 .not-visible.paper-tabs {
-    cursor: default;
-    opacity: 0
-}
-
-.paper-tabs-0 paper-icon-button.paper-tabs {
-    height: 48px;
-    margin: 0 4px;
-    padding: 12px;
-    width: 48px
-}
-
-.paper-tabs-0 #selectionBar.paper-tabs {
-    -webkit-transform: scale(0);
-    -webkit-transform-origin: left center;
-    border-bottom: 2px solid currentcolor;
-    bottom: 0;
-    height: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    transform: scale(0);
-    transform-origin: left center;
-    transition: -webkit-transform;
-    transition: transform;
-    transition: transform, -webkit-transform;
-}
-
-.paper-tabs-0 #selectionBar.align-bottom.paper-tabs {
-    bottom: auto;
-    top: 0
-}
-
-.paper-tabs-0 #selectionBar.expand.paper-tabs {
-    transition-duration: .15s;
-    transition-timing-function: cubic-bezier(.4, 0, 1, 1)
-}
-
-.paper-tabs-0 #selectionBar.contract.paper-tabs {
-    transition-duration: .18s;
-    transition-timing-function: cubic-bezier(0, 0, .2, 1)
-}
-
-.paper-tabs-0 #tabsContent.paper-tabs > :not(#selectionBar) {
-    height: 100%
-}

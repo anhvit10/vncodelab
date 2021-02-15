@@ -1,0 +1,1 @@
+$('#codelab-feedback').hide();
