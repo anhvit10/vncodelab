@@ -1,5 +1,19 @@
 package com.vncodelab.controller;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.google.gson.Gson;
 import com.vncodelab.entity.Cate;
 import com.vncodelab.entity.Lab;
@@ -7,13 +21,6 @@ import com.vncodelab.json.LabInfo;
 import com.vncodelab.model.AjaxResponseBody;
 import com.vncodelab.respository.CateRespository;
 import com.vncodelab.respository.LabRespository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.io.*;
 
 @Controller
 public class MainController {

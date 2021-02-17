@@ -1,17 +1,20 @@
 package com.vncodelab.respository;
 
 
-import com.vncodelab.entity.Cate;
-import com.vncodelab.entity.Lab;
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.vncodelab.entity.Cate;
 
 @Repository
-public interface CateRespository extends CrudRepository<Cate, String> {
+public interface CateRespository extends JpaRepository<Cate, Integer> {
+	
     //  List<Cate> findAllByMore(boolean isMore);
-    Cate findByCateID(int cateID);
+	
+    Optional<Cate> findByCateID(Integer cateID);
 
-    List<Cate> findAllByType(int type);
+    List<Cate> findAllByType(Integer type);
 }
