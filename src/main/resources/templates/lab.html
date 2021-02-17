@@ -33,13 +33,45 @@
 
 <div class="dropdown" id="dropleft">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-        Study room
+            aria-haspopup="true" aria-expanded="false">Phòng học
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+        <a class="dropdown-item" href="#" id="creatroom">Tạo phòng học</a>
+        <a class="dropdown-item" href="#">Vào phòng học</a>
+    </div>
+</div>
+
+<div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
+    <div class="toast-header">
+        <strong class="mr-auto" id="toast-title">Bootstrap</strong>
+        <button type="button" data-delay="2000" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body" id="toast-body">
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tạo phòng học</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form id="add-form" th:action="@{/save}">
+                <div class="modal-body">
+                   Chức năng này tạo ra một phòng học để theo dõi các học viên thực hành trên từng bước
+                </div>
+                <div class="modal-footer">
+                    <span class="mr-auto text-danger" id="modal-error"></span>
+                    <button type="submit" class="btn btn-primary" id="create-room-button">Tạo</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -47,6 +79,29 @@
 <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
 <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+        apiKey: "AIzaSyDj-QxkIp9-HSPRb3kqAmoRRpcx43Q_RGc",
+        authDomain: "vncodelab.firebaseapp.com",
+        databaseURL: "https://vncodelab.firebaseio.com",
+        projectId: "vncodelab",
+        storageBucket: "vncodelab.appspot.com",
+        messagingSenderId: "665655741816",
+        appId: "1:665655741816:web:a3996e52da431ce6bf8c8d"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+</script>
+<script type="text/javascript" src="../static/js/lab.js" th:src="@{/js/index.js}"></script>
 <script type="text/javascript" src="../static/js/lab.js" th:src="@{/js/lab.js}"></script>
 
 </body>

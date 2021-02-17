@@ -51,23 +51,23 @@ public class MainController {
         return ResponseEntity.ok().body(ajaxResponseBody);
     }
 
-//    @GetMapping("/createCate")
-//    public String createCate() {
-//        cateRespository.save(new Cate("Java", ""));
-//        cateRespository.save(new Cate("Swing", ""));
-//        cateRespository.save(new Cate("JSP", ""));
-//        cateRespository.save(new Cate("Servlet", ""));
-//        cateRespository.save(new Cate("JPA", ""));
-//        cateRespository.save(new Cate("Hibernate", ""));
-//        cateRespository.save(new Cate("Spring", ""));
-//        cateRespository.save(new Cate("Android", ""));
-//
-//        cateRespository.save(new Cate("C", "", 1));
-//        cateRespository.save(new Cate("C++", "", 1));
-//        cateRespository.save(new Cate("PHP", "", 1));
-//        cateRespository.save(new Cate("JavaScript", "", 1));
-//        return "done";
-//    }
+    @GetMapping("/createCate")
+    public String createCate() {
+        cateRespository.save(new Cate("Java", ""));
+        cateRespository.save(new Cate("Swing", ""));
+        cateRespository.save(new Cate("JSP", ""));
+        cateRespository.save(new Cate("Servlet", ""));
+        cateRespository.save(new Cate("JPA", ""));
+        cateRespository.save(new Cate("Hibernate", ""));
+        cateRespository.save(new Cate("Spring", ""));
+        cateRespository.save(new Cate("Android", ""));
+
+        cateRespository.save(new Cate("C", "", 1));
+        cateRespository.save(new Cate("C++", "", 1));
+        cateRespository.save(new Cate("PHP", "", 1));
+        cateRespository.save(new Cate("JavaScript", "", 1));
+        return "done";
+    }
 
     @GetMapping("/lab/{docID}")
     public String lab(Model model, @PathVariable(name = "docID") String docID) {

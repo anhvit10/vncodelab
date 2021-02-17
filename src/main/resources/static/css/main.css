@@ -483,7 +483,6 @@ ul {
 #mainToolbar .logo-devs {
     height: 36px;
     margin-top: 5px;
-    width: 216px
 }
 
 #searchbar {
@@ -501,6 +500,32 @@ ul {
 
 #searchbar paper-input-container label {
     opacity: .5
+}
+
+#btnLogin {
+    overflow: hidden;
+    white-space: nowrap;
+    /*background: #546e7a;*/
+    border: none;
+
+}
+#btnLoginDropDown{
+    display: none;
+}
+#login {
+
+    margin-left: 30px;
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a #login:hover {
+    background-color: #78909c
+
 }
 
 @media (min-width: 768px) {
