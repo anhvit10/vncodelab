@@ -39,16 +39,17 @@
     <meta name="twitter:url" property="twitter:url" content="https://vncodelab.appspot.com/">
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
     <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet"/>
     <link href="../static/css/login-register.css" th:href="@{/css/login-register.css}" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
-    <script type="text/javascript" src="../static/js/bootstrap.bundle.min.js" th:src="@{/js/bootstrap.bundle.min.js}"></script>
-    <script type="text/javascript" src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+
 
 </head>
+
 <body id="app" is="body-bind" class="fullbleed" style="padding-top: 0px;">
+
+
 <paper-header-panel id="main" mode="standard" main="" at-top="" class="x-scope paper-header-panel-0">
 
     <div id="mainToolbar" class="paper-header" style="margin-top: 0px;">
@@ -84,9 +85,10 @@
                     </div>
                 </paper-input-container>
             </div>
+
             <div class="btn-group" id="login">
                 <button type="button" class="btn btn-primary rounded" id="btnLogin">Đăng nhập</button>
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="btnLoginDropDown" data-toggle="dropdown"
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="btnLoginDropDown" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only"></span>
                 </button>
@@ -207,6 +209,7 @@
         </div>
     </div>
 </div>
+<!--MODAL LOGIN-->
 <div class="modal fade login" id="loginModal">
     <div class="modal-dialog login animated">
         <div class="modal-content">
@@ -285,6 +288,11 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
+
+
 <script type="text/javascript" src="../static/js/login.js" th:src="@{/js/login.js}"></script>
 <script type="text/javascript" src="../static/js/index.js" th:src="@{/js/index.js}"></script>
 

@@ -5,50 +5,110 @@
     <meta name="theme-color" content="#4F7DC9">
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-    <link rel="stylesheet"
-          href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
-    <script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
-    <script type="text/javascript" src="../static/js/popper.min.js"
-            th:src="@{/js/popper.min.js}"></script>
-    <script type="text/javascript" src="../static/js/bootstrap.bundle.min.js"
-            th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link href="../static/css/login-register.css" th:href="@{/css/login-register.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 
 </head>
 <body>
 
 
+<!--<google-codelab codelab-gaid=""-->
+<!--                th:id="${lab.name}"-->
+<!--                title="Title"-->
+<!--                environment="web"-->
+<!--                feedback-link="">-->
+
+<!--    <div th:utext="${lab.html}"></div>-->
+
+
 <google-codelab codelab-gaid=""
-                th:id="${lab.name}"
+                id="title"
                 title="Title"
                 environment="web"
                 feedback-link="">
 
-    <div th:utext="${lab.html}"></div>
+    <google-codelab-step label="Heading 1" duration="3">
+        <p> Duration:3:00 which uses dark grey 1 text.</p>
+        <h2 is-upgraded>Heading 2</h2>
+        <p class="image-container"><img style="width: 96.31px" src="img/6287aa28c16749ca.png"></p>
+        <aside class="warning"><p>Table single-cell with Light Orange 3 background</p>
+        </aside>
+        <aside class="special"><p>Table single-cell with Light Green 3 background</p>
+        </aside>
+        <pre>Table single-cell with Consolas font</pre>
+        <pre><code>public class Helloworld(){
+//Use courier new font for code, xml ...
+}</code></pre>
+        <p><a href="https://downloadfestival.co.uk/" target="_blank">
+            <paper-button class="colored" raised>Download</paper-button>
+        </a> (Text with Dark green 1 background + hyperlink)
+        </p>
+        <google-codelab-survey survey-id="title-1">
+            <h4>Heading 4 in single-cell table with a light blue 3 background.</h4>
+            <paper-radio-group>
+                <paper-radio-button>List item 1</paper-radio-button>
+                <paper-radio-button>List item 2</paper-radio-button>
+                <paper-radio-button>List item 3</paper-radio-button>
+            </paper-radio-group>
+        </google-codelab-survey>
+
+
+    </google-codelab-step>
+
+    <google-codelab-step label="Cài đặt Claat" duration="0">
+        <p>Cài đặt go tại website</p>
+        <p class="image-container"><img style="width: 601.70px" src="img/6205e03d42f5789d.png"></p>
+        <p>Sau khi cài đặt xong go, tải claat bằng cách gõ lệnh sau:</p>
+        <pre>go get github.com/googlecodelabs/tools/claat</pre>
+        <p>Sau khi lệnh trên chạy xong claat được tải về</p>
+        <p class="image-container"><img style="width: 601.70px" src="img/a0b2d24c521a1d56.png"></p>
+        <p>Chạy claat bằng lệnh sau (chú ý thay đổi đường dẫn):</p>
+        <pre>/Users/xuanlam/go/bin/claat 1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0</pre>
+
+
+    </google-codelab-step>
+
+    <google-codelab-step label="Tạo ra trang landing page" duration="0">
+
+
+    </google-codelab-step>
 
 </google-codelab>
 
 
-<div class="dropdown" id="dropleft">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Phòng học
+<div class="btn-group" id="login">
+    <button type="button" class="btn btn-primary rounded" id="btnLogin">Đăng nhập</button>
+    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="btnLoginDropDown" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+        <span class="sr-only"></span>
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#" id="creatroom">Tạo phòng học</a>
-        <a class="dropdown-item" href="#">Vào phòng học</a>
+    <div class="dropdown-menu" id="dropdown-signout">
+        <a class="dropdown-item" href="#">Tài khoản</a>
+        <a class="dropdown-item" href="#">Lab của bạn</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" id="signout">Đăng xuất</a>
     </div>
 </div>
 
-<div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000">
-    <div class="toast-header">
-        <strong class="mr-auto" id="toast-title">Bootstrap</strong>
-        <button type="button" data-delay="2000" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="toast-body" id="toast-body">
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 5">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
     </div>
 </div>
 
@@ -64,7 +124,7 @@
 
             <form id="add-form" th:action="@{/save}">
                 <div class="modal-body">
-                   Chức năng này tạo ra một phòng học để theo dõi các học viên thực hành trên từng bước
+                    Chức năng này tạo ra một phòng học để theo dõi các học viên thực hành trên từng bước
                 </div>
                 <div class="modal-footer">
                     <span class="mr-auto text-danger" id="modal-error"></span>
@@ -74,6 +134,92 @@
         </div>
     </div>
 </div>
+<!--MODAL LOGIN-->
+<div class="modal fade login" id="loginModal">
+    <div class="modal-dialog login animated">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đăng nhập với</h5>
+            </div>
+            <div class="modal-body">
+                <div class="box">
+                    <div class="content">
+                        <div class="social">
+                            <a id="google_login" class="circle google" href="#">
+                                <i class="bi bi-google"></i>
+                            </a>
+                            <a id="facebook_login" class="circle facebook" href="#">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a class="circle github" href="#">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                        </div>
+                        <div class="division">
+                            <div class="line l"></div>
+                            <span>hoặc</span>
+                            <div class="line r"></div>
+                        </div>
+                        <div class="error"></div>
+                        <div class="form loginBox">
+                            <form method="" action="" accept-charset="UTF-8">
+                                <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                <input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="content registerBox" style="display:none;">
+                        <div class="form">
+                            <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
+                                <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password"
+                                       name="password_confirmation">
+                                <input class="btn btn-default btn-register" type="button" value="Create account" name="commit">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="forgot login-footer">
+                            <span>Looking to
+                                 <a href="javascript: showRegisterForm();">create an account</a>
+                            ?</span>
+                </div>
+                <div class="forgot register-footer" style="display:none">
+                    <span>Already have an account?</span>
+                    <a href="javascript: showLoginForm();">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button id="info" class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-online" aria-expanded="false"
+        aria-controls="collapseExample">
+    Đang đọc <span class="badge badge-light bg-success" id="numOnline">0</span>
+</button>
+<div class="collapse" id="collapse-online">
+    <div class="card card-body">
+        Duration:3:00 which uses dark grey 1 text.
+
+        Heading 2
+        <p></p>
+
+        Table single-cell with Light Orange 3 background
+
+        Table single-cell with Light Green 3 background
+
+        Table single-cell with Consolas font
+
+    </div>
+</div>
+
 
 <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
 <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
@@ -83,25 +229,12 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
 
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<script>
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyDj-QxkIp9-HSPRb3kqAmoRRpcx43Q_RGc",
-        authDomain: "vncodelab.firebaseapp.com",
-        databaseURL: "https://vncodelab.firebaseio.com",
-        projectId: "vncodelab",
-        storageBucket: "vncodelab.appspot.com",
-        messagingSenderId: "665655741816",
-        appId: "1:665655741816:web:a3996e52da431ce6bf8c8d"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-</script>
-<script type="text/javascript" src="../static/js/lab.js" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" src="../static/js/login.js" th:src="@{/js/login.js}"></script>
 <script type="text/javascript" src="../static/js/lab.js" th:src="@{/js/lab.js}"></script>
 
 </body>

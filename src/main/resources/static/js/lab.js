@@ -1,38 +1,74 @@
-$('#codelab-feedback').hide();
-$("#dropleft").detach().appendTo("#codelab-title");
-$(".time-remaining").hide();
-$("#creatroom").click(function () {
-    $('#exampleModal').modal('show')
+var ref;
+$(function () {
+
+    $('#codelab-feedback').hide();
+    $("#login").detach().appendTo("#codelab-title");
+    $(".time-remaining").hide();
+    $("#creatroom").click(function () {
+        $('#exampleModal').modal('show')
+    });
+    $('#create-room-button').click(function (e) {
+        createRoom("1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0", makeid(6));
+    })
+    $('.steps ol li').click(function (e) {
+        updateStep($(this).index());
+    });
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            currentUser = user;
+            afterLogin(user);
+            ref = firebase.database().ref('/labs/1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0/7OkmUq');
+
+            ref.on('value', (snapshot) => {
+                const data = snapshot.val();
+                var currentStep = getSelectedStep();
+                var count = 0;
+                for (var key in data.users) {
+                    var step = data.users[key].step;
+                    if (step == currentStep) {
+                        count++;
+                    }
+                }
+                $('#numOnline').innerText = count;
+                $('#numOnline').text(count)
+
+            });
+            var leave = {};
+            leave['users/' + currentUser.uid] = null;
+            ref.onDisconnect().update(leave);
+            updateStep(getSelectedStep());
+        } else {
+            // No user is signed in.
+        }
+    });
+
 });
 
 
-$('#create-room-button').click(function (e) {
-    // $.ajax({
-    //     url: "/createRoom",
-    //     type: "POST",
-    //     data: JSON.stringify(lab),
-    //     dataType: "json",
-    //     contentType: "application/json",
-    //     success: function (data) {
-    //         $('#toast-title').text("Done")
-    //         $('#toast-body').text("Lab has been added")
-    //         $('#toast').toast('show')
-    //         $('#exampleModal').modal('hide')
-    //         $("#docID").text("")
-    //         $("#description").text("")
-    //         $('#add-lab-button').prop("disabled", false)
-    //         $('#add-lab-button').html('Add')
-    //     },
-    //     error: function (e) {
-    //         $('#add-lab-button').prop("disabled", false)
-    //         $('#add-lab-button').html('Add')
-    //
-    //         $('#modal-error').text('Please check your input!')
-    //     }
-    // })
-    writeUserData(1, "a", "a", "as")
-})
+function getSelectedStep() {
+    var radioButtons = $(".steps ol li");
+    for (const element of radioButtons) {
+        if (element.hasAttribute("selected"))
+            return radioButtons.index(element)
+    }
+}
 
+function updateStep(step) {
+    if (currentUser != null) {
+        var change = {};
+        change['users/' + currentUser.uid] = {
+            step: step,
+            time: firebase.database.ServerValue.TIMESTAMP
+        };
+        ref.update(change);
+    }
+}
+
+function createRoom(docID, roomID) {
+    firebase.database().ref('labs/' + docID + "/" + roomID).set({
+        create_time: firebase.database.ServerValue.TIMESTAMP
+    });
+}
 
 function makeid(length) {
     var result = '';
@@ -50,8 +86,3 @@ function writeLab(docID, room, user, step) {
     });
 }
 
-var starCountRef = firebase.database().ref('users/' + postId + '/starCount');
-starCountRef.on('value', (snapshot) => {
-    const data = snapshot.val();
-    updateStarCount(postElement, data);
-});

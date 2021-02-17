@@ -147,10 +147,9 @@ body {
     line-height: 24px
 }
 
-body,
+
 h1 {
     -webkit-font-smoothing: antialiased;
-    font-family: Roboto, Noto, sans-serif;
     font-weight: 400
 }
 
@@ -509,9 +508,11 @@ ul {
     border: none;
 
 }
-#btnLoginDropDown{
+
+#btnLoginDropDown {
     display: none;
 }
+
 #login {
 
     margin-left: 30px;
@@ -718,6 +719,10 @@ a.codelab-card:hover {
     border-radius: 3px !important
 }
 
+.collapsing {
+    transition: none !important;
+}
+
 .card-footer .category-icon {
     background-position: 0 50%;
     background-repeat: no-repeat;
@@ -726,10 +731,19 @@ a.codelab-card:hover {
     width: 42px
 }
 
-.dropdown .btn {
-    background: #fff;
-    color: #333;
-    border: none
+#info {
+    position: absolute;
+    top: 13px;
+    right: 250px;
+    z-index: 1001;
+}
+
+#collapse-online {
+    position: absolute;
+    top: 68px;
+    right: 150px;
+    z-index: 1001;
+    max-width: 340px;
 }
 
 .dropdown-menu .dropdown-item {
