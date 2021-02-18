@@ -41,7 +41,7 @@
 											<th class="action">Action</th>
 										</tr>
 									</thead>
-									<tbody th:each="cate : ${listcategories}">
+									<tbody th:each="cate : ${pageCate}">
 										<tr class="job-items">
 											<td class="title">
 												<h5>
@@ -52,14 +52,33 @@
 												th:text="${cate.name}"></a></td>
 											<td class="deadline" th:text="${cate.description}"></td>
 											<td class="status active" th:text="${cate.type}"></td>
-											<td class="action"><a href="#" class="preview"
-												title="Preview"><i data-feather="eye"></i></a> <a href="#"
-												class="edit" title="Edit"><i data-feather="edit"></i></a> <a
-												href="#" class="remove" title="Delete"><i
-													data-feather="trash-2"></i></a></td>
+											<td class="action"><a href="#" class="edit" title="Edit"><i
+													data-feather="edit"></i></a> <a href="#" class="remove"
+												title="Delete"><i data-feather="trash-2"></i></a></td>
 										</tr>
 									</tbody>
 								</table>
+
+								<div class="pagination-list text-center">
+									<nav class="navigation pagination">
+										<div class="nav-links">
+											<span class="prev page-numbers"
+												th:if="${pageCate.hasPrevious()}"> <a
+												th:href="@{'/admin/cate?pageNumber=' + ${pageCate.number}}">Pre</a>
+											</span> <span class="page-numbers"
+												th:each="i: ${#numbers.sequence(0, pageCate.totalPages - 1)}">
+												<span th:if="${pageCate.number == i}" class="selected">[[${i}+1]]</span>
+												<span th:unless="${pageCate.number == i}"> <a
+													th:href="@{'/admin/cate?pageNumber='+${i+1}}">[[${i}+1]]</a>
+											</span>
+											</span> <span class="next page-numbers"
+												th:if="${pageCate.hasNext()}"> <a
+												th:href="@{'/admin/cate?pageNumber='+${pageCate.number+2}}">Next</a>
+											</span>
+										</div>
+									</nav>
+								</div>
+
 							</div>
 						</div>
 						<div class="dashboard-sidebar">
