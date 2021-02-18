@@ -35,12 +35,12 @@ public class CateServiceImpl implements ICateService {
 	}
 
 	@Override
-	public void saveCate(Cate cate) {
-		if(0 == cate.getCateID()) {
+	public void saveCate(Cate cate, String cateId) {
+		if("".equals(cateId)) {
 			cateRespository.save(cate);
 		} else {
-			Optional<Cate> oldCate = cateRespository.findByCateID(cate.getCateID());
-			oldCate.get().setCateID(cate.getCateID());
+			Optional<Cate> oldCate = cateRespository.findByCateID(Integer.parseInt(cateId));
+			oldCate.get().setCateID(Integer.parseInt(cateId));
 			oldCate.get().setName(cate.getName());
 			oldCate.get().setDescription(cate.getDescription());
 			oldCate.get().setType(cate.getType());
@@ -49,15 +49,20 @@ public class CateServiceImpl implements ICateService {
 	}
 
 	@Override
-	public void deleteCate(Integer cateID) {
-		cateRespository.deleteById(cateID);
+	public void deleteCate(Integer cateID) throws Exception {
+		Optional<Cate> cate = cateRespository.findByCateID(cateID);
+		if(cate.isEmpty()) {
+			throw new Exception();
+		} else {
+			cateRespository.deleteById(cateID);
+		}
 	}
 
 	@Override
-	public Cate getCateById(Integer cateID) {
+	public Cate getCateById(Integer cateID) throws Exception {
 		Optional<Cate> cate = cateRespository.findByCateID(cateID);
 		if(cate.isEmpty()) {
-			return null;
+			throw new Exception();
 		}
 		return cate.get();
 	}

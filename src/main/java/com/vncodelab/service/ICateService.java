@@ -17,11 +17,11 @@ import com.vncodelab.entity.Cate;
  */
 public interface ICateService {
 
-	void saveCate(Cate cate);
+	void saveCate(Cate cate, String cateId);
 
-	void deleteCate(Integer cateID);
+	void deleteCate(Integer cateID) throws Exception;
 
-	Cate getCateById(Integer cateID);
+	Cate getCateById(Integer cateID) throws Exception;
 
 	Page<Cate> getPageCate(Integer pageNum, Integer pageSize);
 }

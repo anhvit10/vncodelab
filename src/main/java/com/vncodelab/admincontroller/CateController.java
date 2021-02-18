@@ -51,23 +51,23 @@ public class CateController {
 	}
 
 	@PostMapping(value = "/cate/save")
-	public String saveCate(@ModelAttribute("newCategory") Cate cate) {
-		System.out.println(cate.getCateID());
-		cateServiceImpl.saveCate(cate);
+	public String saveCate(@RequestParam("cateId") String cateId, @ModelAttribute("newCategory") Cate cate) throws NumberFormatException {
+		cateServiceImpl.saveCate(cate, cateId);
 		return "redirect:";
 	}
 
 	@GetMapping(value = "/cate/delete/{cateID}")
 	public String deleteCate(@PathVariable("cateID") String cateID,
-			@RequestParam(value = "pageNum") Integer pageNumber) {
+			@RequestParam(value = "pageNum") Integer pageNumber) throws Exception, NumberFormatException {
 		cateServiceImpl.deleteCate(Integer.parseInt(cateID));
 		return "redirect:/admin/cate?pageNumber=" + pageNumber;
 	}
 
 	@GetMapping(value = "/cate/{cateID}")
-	public String toEditCatePage(Model model, @PathVariable("cateID") String cateID) {
+	public String toEditCatePage(Model model, @PathVariable("cateID") String cateID) throws Exception, NumberFormatException {
 		Cate cate = cateServiceImpl.getCateById(Integer.parseInt(cateID));
 		model.addAttribute("newCategory", cate);
+		model.addAttribute("cateId", cate.getCateID());
 		return "admin/save-cate";
 	}
 }
