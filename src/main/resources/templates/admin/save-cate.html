@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head th:include="util/header :: header">
+<body>
+
+	<!-- Breadcrumb -->
+	<div class="alice-bg padding-top-70 padding-bottom-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="breadcrumb-area">
+						<h1>Post A Category</h1>
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Post
+									A Category</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcrumb End -->
+
+	<div class="alice-bg section-padding-bottom">
+		<div class="container no-gliters">
+			<div class="row no-gliters">
+				<div class="post-container">
+					<form th:action="@{save}" th:object="${newCategory}" method="POST" class="job-post-form">
+						<div class="basic-info-input">
+							<h4>
+								<i data-feather="plus-circle"></i>Post A Category
+							</h4>
+							
+							<div id="job-title" class="form-group row">
+								<label class="col-md-3 col-form-label">Category ID</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control" th:field="*{cateID}" disabled="disabled">
+								</div>
+							</div>
+							
+							<div id="job-title" class="form-group row">
+								<label class="col-md-3 col-form-label">Category Name</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"
+										placeholder="Name here !" th:field="*{name}" required="required">
+								</div>
+							</div>
+
+							<div id="job-description" class="row">
+								<label class="col-md-3 col-form-label">Category
+									Description</label>
+								<div class="col-md-9">
+									<input type="text" class="form-control"
+										placeholder="Description here !" th:field="*{description}" required="required">
+								</div>
+							</div>
+
+							<div id="job-summery" class="row">
+								<label class="col-md-3 col-form-label">Category Type</label>
+								<div class="col-md-9">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<select class="form-control" th:field="*{type}">
+													<option th:value="0">0</option>
+													<option th:value="1">1</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-3 col-form-label"></label>
+								<div class="col-md-9">
+									<button class="button">Save</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="util/footer :: footer"></div>
+
+</body>
+</html>

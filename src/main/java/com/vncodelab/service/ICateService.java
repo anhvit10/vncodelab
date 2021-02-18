@@ -17,5 +17,11 @@ import com.vncodelab.entity.Cate;
  */
 public interface ICateService {
 
+	void saveCate(Cate cate);
+
+	void deleteCate(Integer cateID);
+
+	Cate getCateById(Integer cateID);
+
 	Page<Cate> getPageCate(Integer pageNum, Integer pageSize);
 }

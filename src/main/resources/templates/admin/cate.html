@@ -31,6 +31,10 @@
 					<div class="dashboard-container">
 						<div class="dashboard-content-wrapper">
 							<div class="manage-job-container">
+								<ul>
+									<li class="menu-item post-job"><a th:href="@{cate/new}"><i
+											class="fas fa-plus"></i>Post a Category</a></li>
+								</ul>
 								<table class="table">
 									<thead>
 										<tr>
@@ -52,9 +56,10 @@
 												th:text="${cate.name}"></a></td>
 											<td class="deadline" th:text="${cate.description}"></td>
 											<td class="status active" th:text="${cate.type}"></td>
-											<td class="action"><a href="#" class="edit" title="Edit"><i
-													data-feather="edit"></i></a> <a href="#" class="remove"
-												title="Delete"><i data-feather="trash-2"></i></a></td>
+											<td class="action">
+												<a class="edit btn"   title="Edit"   th:href="@{'/admin/cate/' + ${cate.cateID}}"							   ><i data-feather="edit"   ></i></a> 
+												<a class="remove btn" title="Delete" th:href="@{'/admin/cate/delete/' + ${cate.cateID} + '?pageNum=' + ${pageNum}}"><i data-feather="trash-2"></i></a>
+											</td>
 										</tr>
 									</tbody>
 								</table>
