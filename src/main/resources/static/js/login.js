@@ -11,36 +11,7 @@ var currentUser;
 firebase.initializeApp(firebaseConfig);
 
 $(function () {
-    $('#add-lab-button').click(function (e) {
-        var lab = {}
-        lab["docID"] = $("#docID").val();
-        lab["description"] = $("#description").val();
-        lab["cateID"] = $("#cateID").val();
-        $(this).prop("disabled", true);
-        $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Adding...');
-        $.ajax({
-            url: "/save",
-            type: "POST",
-            data: JSON.stringify(lab),
-            dataType: "json",
-            contentType: "application/json",
-            success: function (data) {
-                $('#toast-title').text("Done")
-                $('#toast-body').text("Lab has been added")
-                $('#toast').toast('show')
-                $('#exampleModal').modal('hide')
-                $("#docID").text("")
-                $("#description").text("")
-                $('#add-lab-button').prop("disabled", false)
-                $('#add-lab-button').html('Add')
-            },
-            error: function (e) {
-                $('#add-lab-button').prop("disabled", false)
-                $('#add-lab-button').html('Add')
-                $('#modal-error').text('Please check your input!')
-            }
-        })
-    });
+
     $('#btnLogin').click(function (e) {
         openLoginModal();
     });
@@ -49,8 +20,6 @@ $(function () {
         firebase.auth()
             .signInWithPopup(provider)
             .then((result) => {
-
-                /** @type {firebase.auth.OAuthCredential} */
                 var credential = result.credential;
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 var token = credential.accessToken;
@@ -75,7 +44,9 @@ $(function () {
             });
             $('#btnLogin').text("Đăng nhập");
             $('#btnLogin').addClass("rounded")
-            $('#btnLoginDropDown').hide();
+            $('#profilePicture').addClass("d-none")
+            $('#btnLogin').removeClass("d-none")
+            $('#collapse-profile').hide()
         }).catch((error) => {
             // An error happened.
         });
@@ -87,7 +58,7 @@ $(function () {
             currentUser = user;
             afterLogin(user);
         } else {
-            // No user is signed in.
+            $('#btnLogin').removeClass("d-none")
         }
     });
 });
@@ -96,10 +67,12 @@ $(function () {
 
 function afterLogin(user) {
     $('#loginModal').modal('hide')
-    $('#btnLogin').text(user.displayName);
-    $('#btnLogin').off();
-    $('#btnLogin').removeClass("rounded")
-    $('#btnLoginDropDown').show();
+    $('#btnLogin').addClass("d-none")
+    $('#profilePicture').removeClass("d-none")
+    $('#profilePicture').attr("src",user.photoURL)
+    $('#profilePictureBig').attr("src",user.photoURL)
+    $('#profileName').text(user.displayName)
+    $('#profileEmail').text(user.email)
 }
 
 function showRegisterForm() {

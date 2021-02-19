@@ -501,16 +501,19 @@ ul {
     opacity: .5
 }
 
-#btnLogin {
-    overflow: hidden;
-    white-space: nowrap;
-    /*background: #546e7a;*/
-    border: none;
-
+#profilePicture{
+    margin-left: 10px;
 }
 
-#btnLoginDropDown {
-    display: none;
+#btnLogin {
+    margin-left: 10px;
+}
+#btnRoom {
+    margin-left: 10px;
+}
+
+#btnMore {
+    margin-left: 10px;
 }
 
 #login {
@@ -737,13 +740,18 @@ a.codelab-card:hover {
     right: 250px;
     z-index: 1001;
 }
+.steps ol li{
+    margin-bottom: 20px;
+}
+.steps ol li .badge{
+    margin-left: auto;
+}
+.my-badge:hover{
+    background-color: green !important;
+}
 
-#collapse-online {
-    position: absolute;
-    top: 68px;
-    right: 150px;
-    z-index: 1001;
-    max-width: 340px;
+.popover-body {
+   min-width: 400px;
 }
 
 .dropdown-menu .dropdown-item {
