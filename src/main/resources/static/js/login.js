@@ -1,15 +1,17 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyDj-QxkIp9-HSPRb3kqAmoRRpcx43Q_RGc",
-    authDomain: "vncodelab.firebaseapp.com",
-    databaseURL: "https://vncodelab.firebaseio.com",
-    projectId: "vncodelab",
-    storageBucket: "vncodelab.appspot.com",
-    messagingSenderId: "665655741816",
-    appId: "1:665655741816:web:a3996e52da431ce6bf8c8d"
+    apiKey: "AIzaSyCAowCDyHC5b0HhhIBvxVqc0o3lLSMXnJM",
+    authDomain: "vncodelab2.firebaseapp.com",
+    databaseURL: "https://vncodelab2-default-rtdb.firebaseio.com",
+    projectId: "vncodelab2",
+    storageBucket: "vncodelab2.appspot.com",
+    messagingSenderId: "852532707206",
+    appId: "1:852532707206:web:5281cd31d29828fbc7f607",
+    measurementId: "G-6ZVL24X18C"
 };
-var currentUser;
-firebase.initializeApp(firebaseConfig);
 
+
+firebase.initializeApp(firebaseConfig);
+var currentUser;
 $(function () {
 
     $('#btnLogin').click(function (e) {
