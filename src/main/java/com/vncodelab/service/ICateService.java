@@ -1,6 +1,8 @@
 //
 package com.vncodelab.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 
 import com.vncodelab.entity.Cate;
@@ -16,6 +18,8 @@ import com.vncodelab.entity.Cate;
  * @modifer_date: Feb 18, 2021
  */
 public interface ICateService {
+
+	List<Cate> findAllCate();
 
 	void saveCate(Cate cate, String cateId);
 

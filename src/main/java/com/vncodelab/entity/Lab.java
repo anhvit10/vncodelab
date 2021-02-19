@@ -1,64 +1,85 @@
 package com.vncodelab.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Lab {
-    @Id
-    private String docID;
-    private String name;
-    private String description;
-    @Column(length = 1000000)
-    private String html;
 
-    private int cateID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "labID")
+	private int labID;
 
-    public int getCateID() {
-        return cateID;
-    }
+	@Column(unique = true)
+	private String docID;
 
-    public void setCateID(int cateID) {
-        this.cateID = cateID;
-    }
+	private String name;
 
-    public String getHtml() {
-        return html;
-    }
+	private String description;
 
-    public void setHtml(String html) {
-        this.html = html;
-    }
+	@Column(length = 1000000)
+	private String html;
 
-    public Lab() {
+	private int cateID;
 
-    }
+	public int getLabID() {
+		return labID;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setLabID(int labID) {
+		this.labID = labID;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public int getCateID() {
+		return cateID;
+	}
 
-    public Lab(String docID, String name) {
-        this.docID = docID;
-        this.name = name;
-    }
+	public void setCateID(int cateID) {
+		this.cateID = cateID;
+	}
 
-    public String getDocID() {
-        return docID;
-    }
+	public String getHtml() {
+		return html;
+	}
 
-    public void setDocID(String docID) {
-        this.docID = docID;
-    }
+	public void setHtml(String html) {
+		this.html = html;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Lab() {
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Lab(String docID, String name) {
+		this.docID = docID;
+		this.name = name;
+	}
+
+	public String getDocID() {
+		return docID;
+	}
+
+	public void setDocID(String docID) {
+		this.docID = docID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

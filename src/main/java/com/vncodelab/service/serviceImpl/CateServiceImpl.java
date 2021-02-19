@@ -1,6 +1,7 @@
 //
 package com.vncodelab.service.serviceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class CateServiceImpl implements ICateService {
 
 	@Override
 	public void saveCate(Cate cate, String cateId) {
-		if("".equals(cateId)) {
+		if ("".equals(cateId)) {
 			cateRespository.save(cate);
 		} else {
 			Optional<Cate> oldCate = cateRespository.findByCateID(Integer.parseInt(cateId));
@@ -51,7 +52,7 @@ public class CateServiceImpl implements ICateService {
 	@Override
 	public void deleteCate(Integer cateID) throws Exception {
 		Optional<Cate> cate = cateRespository.findByCateID(cateID);
-		if(cate.isEmpty()) {
+		if (cate.isEmpty()) {
 			throw new Exception();
 		} else {
 			cateRespository.deleteById(cateID);
@@ -61,10 +62,15 @@ public class CateServiceImpl implements ICateService {
 	@Override
 	public Cate getCateById(Integer cateID) throws Exception {
 		Optional<Cate> cate = cateRespository.findByCateID(cateID);
-		if(cate.isEmpty()) {
+		if (cate.isEmpty()) {
 			throw new Exception();
 		}
 		return cate.get();
+	}
+
+	@Override
+	public List<Cate> findAllCate() {
+		return cateRespository.findAll();
 	}
 
 }
