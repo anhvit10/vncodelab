@@ -1,7 +1,5 @@
 package com.vncodelab;
 
-import com.vncodelab.entity.Lab;
-import com.vncodelab.respository.LabRespository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -10,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+
+import com.vncodelab.respository.LabRespository;
 
 @SpringBootApplication
 public class VnCodelabApplication extends SpringBootServletInitializer {

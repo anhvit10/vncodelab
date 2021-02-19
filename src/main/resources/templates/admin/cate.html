@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head th:include="util/header :: header">
+<body>
+
+	<!-- Breadcrumb -->
+	<div class="alice-bg padding-top-70 padding-bottom-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="breadcrumb-area">
+						<h1>Category Dashboard</h1>
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Category
+									Dashboard</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcrumb End -->
+
+	<div class="alice-bg section-padding-bottom">
+		<div class="container no-gliters">
+			<div class="row no-gliters">
+				<div class="col">
+					<div class="dashboard-container">
+						<div class="dashboard-content-wrapper">
+							<div class="manage-job-container">
+								<ul>
+									<li class="menu-item post-job"><a th:href="@{cate/new}"><i
+											class="fas fa-plus"></i>Post a Category</a></li>
+								</ul>
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Cate ID</th>
+											<th>Cate Name</th>
+											<th>Description</th>
+											<th>Type</th>
+											<th class="action">Action</th>
+										</tr>
+									</thead>
+									<tbody th:each="cate : ${pageCate}">
+										<tr class="job-items">
+											<td class="title">
+												<h5>
+													<a href="#" th:text="${cate.cateID}"></a>
+												</h5>
+											</td>
+											<td class="application"><a href="#"
+												th:text="${cate.name}"></a></td>
+											<td class="deadline" th:text="${cate.description}"></td>
+											<td class="status active" th:text="${cate.type}"></td>
+											<td class="action"><a class="edit btn" title="Edit"
+												th:href="@{'/admin/cate/' + ${cate.cateID}}"><i
+													data-feather="edit"></i></a> <a class="remove btn"
+												title="Delete"
+												th:href="@{'/admin/cate/delete/' + ${cate.cateID} + '?pageNum=' + ${pageNum}}"><i
+													data-feather="trash-2"></i></a></td>
+										</tr>
+									</tbody>
+								</table>
+
+								<div class="pagination-list text-center"
+									th:if="${pageCate.hasContent()}">
+									<nav class="navigation pagination">
+										<div class="nav-links">
+											<span class="prev page-numbers"
+												th:if="${pageCate.hasPrevious()}"> <a
+												th:href="@{'/admin/cate?pageNumber=' + ${pageCate.number}}">Pre</a>
+											</span> <span class="page-numbers"
+												th:each="i: ${#numbers.sequence(0, pageCate.totalPages - 1)}">
+												<span th:if="${pageCate.number == i}" class="selected">[[${i}+1]]</span>
+												<span th:unless="${pageCate.number == i}"> <a
+													th:href="@{'/admin/cate?pageNumber='+${i+1}}">[[${i}+1]]</a>
+											</span>
+											</span> <span class="next page-numbers"
+												th:if="${pageCate.hasNext()}"> <a
+												th:href="@{'/admin/cate?pageNumber='+${pageCate.number+2}}">Next</a>
+											</span>
+										</div>
+									</nav>
+								</div>
+
+							</div>
+						</div>
+						<div class="dashboard-sidebar">
+							<div class="company-info">
+								<div class="thumb">
+									<img src="" class="img-fluid" alt="">
+								</div>
+								<div class="company-body">
+									<h5>Viet Anh</h5>
+									<span>@Anh</span>
+								</div>
+							</div>
+							<div class="dashboard-menu">
+								<ul>
+									<li><i class="fas fa-home"></i><a href="#">Dashboard</a></li>
+									<li><i class="fas fa-briefcase"></i><a th:href="@{cate}">Manage
+											Categories</a></li>
+									<li><i class="fas fa-users"></i><a th:href="@{laboratory}">Manage
+											Labs</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="util/footer :: footer"></div>
+
+</body>
+</html>
