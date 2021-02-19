@@ -53,7 +53,7 @@ public class CateController {
 	@PostMapping(value = "/cate/save")
 	public String saveCate(@RequestParam("cateId") String cateId, @ModelAttribute("newCategory") Cate cate) throws NumberFormatException {
 		cateServiceImpl.saveCate(cate, cateId);
-		return "redirect:";
+		return "redirect:/admin/cate";
 	}
 
 	@GetMapping(value = "/cate/delete/{cateID}")

@@ -126,7 +126,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> More
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a th:each="cate : ${cateListMore}" class="dropdown-item" href="#"><span
+                            <a th:each="cate : ${cateListMore}" class="dropdown-item" th:href="@{/cate/{path}(path=*{cate.getCateID()})}"><span
                                     th:text="*{cate.getName()}"></span></a>
                         </div>
                     </div>

@@ -62,7 +62,7 @@ public class LabController {
 	@PostMapping(value = "/laboratory/save")
 	public String saveLab(@RequestParam("labId") String labId, @ModelAttribute("newLaboratory") Lab lab) {
 		labServiceImpl.saveLab(lab, labId);
-		return "redirect:";
+		return "redirect:/admin/laboratory";
 	}
 
 	@GetMapping(value = "/laboratory/delete/{labID}")
