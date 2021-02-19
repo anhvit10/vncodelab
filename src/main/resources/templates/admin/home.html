@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head th:include="util/header :: header">
+<body>
+
+	<!-- Breadcrumb -->
+	<div class="alice-bg padding-top-70 padding-bottom-70">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="breadcrumb-area">
+						<h1>Home Dashboard</h1>
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Home
+									Dashboard</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcrumb End -->
+
+	<div class="alice-bg section-padding-bottom">
+		<div class="container no-gliters">
+			<div class="row no-gliters">
+				<div class="col">
+					<div class="dashboard-container">
+						<div class="dashboard-content-wrapper">
+							<div class="manage-job-container">
+								<table class="table">
+									<thead>
+										<tr>
+											<th style="text-align: center; width: 20%;">Home Logo</th>
+											<th style="text-align: center; width: 50%;">Home Title</th>
+											<th style="text-align: center; width: 30%;">Home Footer</th>
+											<th style="text-align: center; width: 10%;" class="action">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="job-items">
+											<td class="application" th:text="${infor.logoUrl}"></td>
+											<td class="application" th:text="${infor.title}"></td>
+											<td class="application" th:text="${infor.footer}"></td>
+											<td class="action"><a class="edit btn" title="Edit"
+												th:href="@{'/admin/home/edit'}"><i data-feather="edit"></i></a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="dashboard-sidebar">
+							<div class="company-info">
+								<div class="thumb">
+									<img src="" class="img-fluid" alt="">
+								</div>
+								<div class="company-body">
+									<h5>Viet Anh</h5>
+									<span>@Anh</span>
+								</div>
+							</div>
+							<div class="dashboard-menu">
+								<ul>
+									<li><i class="fas fa-home"></i><a href="#">Dashboard</a></li>
+									<li><i class="fas fa-briefcase"></i><a th:href="@{home}">Manager
+											Home</a></li>
+									<li><i class="fas fa-briefcase"></i><a th:href="@{cate}">Manage
+											Categories</a></li>
+									<li><i class="fas fa-users"></i><a th:href="@{laboratory}">Manage
+											Labs</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="util/footer :: footer"></div>
+
+</body>
+</html>
