@@ -16,6 +16,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
 import com.vncodelab.constants.FirebaseConstants;
+import com.vncodelab.constants.PathConstants;
 import com.vncodelab.entity.Home;
 import com.vncodelab.service.IHomeService;
 
@@ -44,10 +45,9 @@ public class HomeServiceImpl implements IHomeService {
 	public void saveObjectFirebase(Home home) throws IOException {
 		home.setLogoUrl("/images/" + home.getImage().getOriginalFilename());
 
-		if (Files.notExists(Paths.get("D:\\eclipse-workspace\\vncodelab\\src\\main\\resources\\static\\images\\"
-				+ home.getImage().getOriginalFilename()))) {
+		if (Files.notExists(Paths.get(PathConstants.PATH_LOGO_FOLDER + home.getImage().getOriginalFilename()))) {
 			byte[] bytes = home.getImage().getBytes();
-			Path path = Paths.get("D:\\eclipse-workspace\\vncodelab\\src\\main\\resources\\static\\images\\");
+			Path path = Paths.get(PathConstants.PATH_LOGO_FOLDER + home.getImage().getOriginalFilename());
 			Files.write(path, bytes);
 		}
 
