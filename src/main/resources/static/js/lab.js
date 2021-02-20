@@ -1,5 +1,8 @@
-var ref;
+var refUsers;
 var refChat;
+
+var labid = "1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0";
+var roomid = '7OkmUq'
 
 $(function () {
 
@@ -10,103 +13,118 @@ $(function () {
         $('#exampleModal').modal('show')
     });
     $('#create-room-button').click(function (e) {
-        createRoom("1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0", makeid(6));
+        createRoom(labid, makeid(6));
     })
     $('.steps ol li').click(function (e) {
         updateStep($(this).index());
     });
-// $('#add-lab-button').click(function (e) {
-    //     var lab = {}
-    //     lab["docID"] = $("#docID").val();
-    //     lab["description"] = $("#description").val();
-    //     lab["cateID"] = $("#cateID").val();
-    //     $(this).prop("disabled", true);
-    //     $(this).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Adding...');
-    //     $.ajax({
-    //         url: "/save",
-    //         type: "POST",
-    //         data: JSON.stringify(lab),
-    //         dataType: "json",
-    //         contentType: "application/json",
-    //         success: function (data) {
-    //             $('#toast-title').text("Done")
-    //             $('#toast-body').text("Lab has been added")
-    //             $('#toast').toast('show')
-    //             $('#exampleModal').modal('hide')
-    //             $("#docID").text("")
-    //             $("#description").text("")
-    //             $('#add-lab-button').prop("disabled", false)
-    //             $('#add-lab-button').html('Add')
-    //         },
-    //         error: function (e) {
-    //             $('#add-lab-button').prop("disabled", false)
-    //             $('#add-lab-button').html('Add')
-    //             $('#modal-error').text('Please check your input!')
-    //         }
-    //     })
-    // });
 
-    var first = true
+    $('.toast').toast()
+
+
+    var firstEnterRoom = true
     $('#btnRoom').click(function () {
-        if (first) {
+        if (firstEnterRoom) {
             showChat($('#chat0'), "all")
-            first = false;
+            firstEnterRoom = false;
         }
     })
+    $('.steps ol li a').append("\n" +
+        "<span class=\"badge badge-secondary bg-secondary my-badge invisible\" onmouseover=\"hoverdiv(this,'divtoshow')\" onmouseout=\"hoverdiv(this,'divtoshow')\">0</span>")
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             currentUser = user;
             afterLogin(user);
-            ref = firebase.database().ref('/labs/1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0/7OkmUq/users');
-            ref.on('value', (snapshot) => {
+            refUsers = firebase.database().ref('/labs/' + labid + '/' + roomid + '/users');
+            refUsers.on('value', (snapshot) => {
                 const data = snapshot.val();
                 var count = []
                 var totalUser = 0;
                 $('#usersChat').empty()
+                var userinStep = "";
                 for (var uid in data) {
                     var step = data[uid].step;
                     if (count[step] == undefined)
-                        count[step] = 0;
-                    count[step]++;
+                        count[step] = {count: 0, user: ""};
+                    count[step].count++;
+                    count[step].user = count[step].user + data[uid].name + "<br>";
                     totalUser++;
                     //Add to chat room
                     if (currentUser.uid != uid)
                         $('#usersChat').append("<a href='#' onclick='showChat(this,\"" + uid + "\")' class=\"list-group-item list-group-item-action rounded-0 media uchat\"><img src=\"" + data[uid].photo + "\" alt=\"user\" width=\"40\" height=\"40\"  class=\"rounded-circle\"><div class=\"media-body\">" + data[uid].name + "</div></a>")
+
                 }
+                $('.speech-bubble').html(userinStep)
+
                 for (let i = 1; i <= getNumberOfSteps(); i++) {
                     if (count[i - 1] == undefined)
                         $('li:nth-child(' + i + ') > a > span.badge').addClass("invisible")
                     else {
                         $('li:nth-child(' + i + ') > a > span.badge').removeClass("invisible")
-                        $('li:nth-child(' + i + ') > a > span.badge').text(count[i - 1]);
+                        $('li:nth-child(' + i + ') > a > span.badge').text(count[i - 1].count);
+                        $('li:nth-child(' + i + ') > a > span.badge').attr("user", count[i - 1].user)
+
                     }
                 }
                 $('#numOnline').text(totalUser)
             });
             var leave = {};
             leave['users/' + currentUser.uid] = null;
-            ref.onDisconnect().update(leave);
+            refUsers.onDisconnect().update(leave);
             updateStep(getSelectedStep());
+            //Listen to Notification
+            var first = true;
+            firebase.database().ref('/notifies/' + currentUser.uid).on('value', (snapshot) => {
+                if (!first) {
+                    const data = snapshot.val();
+                    if (!$("#collapse-online").hasClass("show") || ($("#collapse-online").hasClass("show") && sendTo !== data.uid)) {
+                        $("#toastTitle").text(data.uname);
+                        $("#toastBody").text(data.message);
+                        $('.toast').toast('show');
+                    }
+                }
+                first = false;
+            });
+
+            var firstAll = true;
+            firebase.database().ref('/labs/' + labid + '/' + roomid + '/notifies/all').on('value', (snapshot) => {
+                if (!firstAll) {
+                    if (!$("#collapse-online").hasClass("show") || ($("#collapse-online").hasClass("show") && sendTo !== "all")) {
+                        const data = snapshot.val();
+                        $("#toastTitle").text("Chat room");
+                        $("#toastBody").text(data.message);
+                        $('.toast').toast('show');
+                    }
+                }
+                firstAll = false;
+            });
+
 
         } else {
             // No user is signed in.
         }
     });
 
-
-
 });
 
 //Chat
 var chatroom;
+var sendTo;
+
+function showmess(e) {
+    e.preventDefault();
+    alert("d")
+    return false;
+}
 
 function showChat(me, uid) {
+    sendTo = uid;
     if (refChat != null)
         refChat.off()
     $('#chatMessages').empty();
     if (uid === "all") {
-        refChat = firebase.database().ref('/labs/1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0/7OkmUq/chats/all/');
+        refChat = firebase.database().ref('/labs/' + labid + '/' + roomid + '/chats/all/');
         chatroom = uid;
     } else {
         if (uid > currentUser.uid)
@@ -124,16 +142,45 @@ function showChat(me, uid) {
 }
 
 function sendMessage() {
-    var change = {};
-    change[refChat.push().key] = {
-        uid: currentUser.uid,
-        name: currentUser.displayName,
-        photo: currentUser.photoURL,
-        time: firebase.database.ServerValue.TIMESTAMP,
-        message: $('#txtMessage').val()
-    };
-    refChat.update(change);
-    $('#txtMessage').val("")
+    if ($('#txtMessage').val().trim() !== "") {
+        var change = {};
+        change[refChat.push().key] = {
+            uid: currentUser.uid,
+            name: currentUser.displayName,
+            photo: currentUser.photoURL,
+            time: firebase.database.ServerValue.TIMESTAMP,
+            message: $('#txtMessage').val()
+        };
+        refChat.update(change);
+        var ref;
+        if (sendTo === "all") {
+            ref = firebase.database().ref('/labs/' + labid + '/' + roomid + '/notifies/all')
+        } else {
+            ref = firebase.database().ref('/notifies/' + sendTo)
+        }
+        ref.set({
+            uid: currentUser.uid,
+            uname: currentUser.displayName,
+            message: $('#txtMessage').val(),
+            time: firebase.database.ServerValue.TIMESTAMP
+        });
+        $('#txtMessage').val("")
+
+        //REMOVE OLD CHAT
+        const MAX_COUNT = 99;  //Keep 100 recent
+        refChat.once('value', function (snapshot) {
+            if (snapshot.numChildren() > MAX_COUNT) {
+                var childCount = 0;
+                var updates = {};
+                snapshot.forEach(function (child) {
+                    if (++childCount < snapshot.numChildren() - MAX_COUNT) {
+                        updates[child.key] = null;
+                    }
+                });
+                refChat.update(updates);
+            }
+        });
+    }
 }
 
 function showMessage(data) {
@@ -168,7 +215,7 @@ function updateStep(step) {
             name: currentUser.displayName,
             photo: currentUser.photoURL
         };
-        ref.update(change);
+        refUsers.update(change);
     }
 }
 
@@ -258,4 +305,20 @@ var TimeAgo = (function () {
 
     return self;
 }());
+
+function hoverdiv(e, divid) {
+
+    var left = 40 + $(e).offset().left + "px";
+    var top = $(e).offset().top + "px";
+
+
+    var div = document.getElementById(divid);
+    div.innerHTML = $(e).attr("user")
+
+    div.style.left = left;
+    div.style.top = top;
+
+    $("#" + divid).toggle();
+    return false;
+}
 

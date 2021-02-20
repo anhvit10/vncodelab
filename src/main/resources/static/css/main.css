@@ -748,7 +748,7 @@ a.codelab-card:hover {
     margin-left: auto;
 }
 .my-badge:hover{
-    background-color: green !important;
+    background-color: #007bff !important;
 }
 
 .popover-body {
