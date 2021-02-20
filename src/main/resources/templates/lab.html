@@ -100,8 +100,6 @@
             data-bs-offset="0,25"></button>
     <div class="dropdown-menu shadow border-0" id="dropdown-signout">
         <a class="dropdown-item" href="#">Hướng dẫn</a>
-
-
     </div>
 </div>
 
@@ -210,7 +208,7 @@
 </div>
 
 <!--COLLAPSE CHAT ROOM-->
-<div class="collapse container row rounded-lg overflow-hidden shadow show" id="collapse-online" aria-expanded="true">
+<div class="collapse container row rounded-lg overflow-hidden shadow " id="collapse-online" aria-expanded="true">
     <!-- Users box-->
     <div class="col-4 px-0 chat-leftside">
         <div class="messages-box">
@@ -227,80 +225,18 @@
     </div>
     <!-- Chat Box-->
     <div class="col-8 px-0 main-chat">
-        <div class="px-4 py-5 chat-box bg-white ">
-            <!-- Sender Message-->
-            <div class="media w-75 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
-                                              width="50" class="rounded-circle">
-                <div class="media-body ml-3">
-                    <div class="bg-light rounded py-2 px-3 mb-2">
-                        <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p>
-                    </div>
-                    <p class="small text-muted">12:00 PM | Aug 13</p>
-                </div>
-            </div>
-
-            <!-- Reciever Message-->
-            <div class="media w-75 ml-auto mb-3">
-                <div class="media-body">
-                    <div class="bg-primary rounded py-2 px-3 mb-2">
-                        <p class="text-small mb-0 text-white">Test which is a new approach to have all solutions</p>
-                    </div>
-                    <p class="small text-muted">12:00 PM | Aug 13</p>
-                </div>
-            </div>
-
-            <!-- Sender Message-->
-            <div class="media w-75 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
-                                              width="50" class="rounded-circle">
-                <div class="media-body ml-3">
-                    <div class="bg-light rounded py-2 px-3 mb-2">
-                        <p class="text-small mb-0 text-muted">Test, which is a new approach to have</p>
-                    </div>
-                    <p class="small text-muted">12:00 PM | Aug 13</p>
-                </div>
-            </div>
-
-            <!-- Reciever Message-->
-            <div class="media w-75 ml-auto mb-3">
-                <div class="media-body">
-                    <div class="bg-primary rounded py-2 px-3 mb-2">
-                        <p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
-                    </div>
-                    <p class="small text-muted">12:00 PM | Aug 13</p>
-                </div>
-            </div>
-
-            <!-- Sender Message-->
-            <div class="media w-75 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user"
-                                              width="50" class="rounded-circle">
-                <div class="media-body ml-3">
-                    <div class="bg-light rounded py-2 px-3 mb-2">
-                        <p class="text-small mb-0 text-muted">Test, which is a new approach</p>
-                    </div>
-                    <p class="small text-muted">12:00 PM | Aug 13</p>
-                </div>
-            </div>
-
-            <!-- Reciever Message-->
-            <div class="media w-50 ml-auto mb-3">
-                <div class="media-body">
-                    <div class="bg-primary rounded py-2 px-3 mb-2">
-                        <p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
-                    </div>
-                    <p class="small text-muted">12:00 PM | Aug 13</p>
-                </div>
-            </div>
+        <div class="px-4 chat-box bg-white" id="chatMessages">
 
         </div>
 
         <!-- Typing area -->
         <form action="#" class="bg-light input-group">
 
-            <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 bg-light">
+            <input id="txtMessage" type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 bg-light">
             <div class="input-group-append">
-                <button id="button-addon2" type="submit" class="btn btn-link"><img width="30px" height="30px"
-                                                                                   src="../static/images/send-button.svg"
-                                                                                   th:src="@{/images/send-button.svg}"/></button>
+                <button id="button-addon2" type="submit" class="btn btn-link" onclick="sendMessage()">
+                    <img width="30px" height="30px" src="../static/images/send-button.svg" th:src="@{/images/send-button.svg}"/>
+                </button>
             </div>
 
         </form>
@@ -329,10 +265,11 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
 
-<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
-<script type="text/javascript" src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
-<script type="text/javascript" src="../static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-messaging.js"></script>
 
+
+<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" src="../static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
 
 <script type="text/javascript" src="../static/js/login.js" th:src="@{/js/login.js}"></script>
 <script type="text/javascript" src="../static/js/lab.js" th:src="@{/js/lab.js}"></script>

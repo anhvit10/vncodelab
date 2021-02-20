@@ -64,11 +64,19 @@
 .ml-auto, .mx-auto {
     margin-left: auto!important;
 }
-
+.chat-time{
+    font-size: 12px;
+}
 .media-body {
     width: 100%;
     margin: auto;
     padding-left: 10px;
+}
+.chat-body {
+    text-align: right;
+}
+.chat-75{
+    max-width:55%
 }
 
 .main-chat {

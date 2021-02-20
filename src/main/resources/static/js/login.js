@@ -1,3 +1,4 @@
+
 var firebaseConfig = {
     apiKey: "AIzaSyCAowCDyHC5b0HhhIBvxVqc0o3lLSMXnJM",
     authDomain: "vncodelab2.firebaseapp.com",
@@ -8,7 +9,6 @@ var firebaseConfig = {
     appId: "1:852532707206:web:5281cd31d29828fbc7f607",
     measurementId: "G-6ZVL24X18C"
 };
-
 
 firebase.initializeApp(firebaseConfig);
 var currentUser;
