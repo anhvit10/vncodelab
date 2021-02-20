@@ -507,6 +507,7 @@ ul {
 
 #btnLogin {
     margin-left: 10px;
+    white-space: nowrap;
 }
 #btnRoom {
     margin-left: 10px;
