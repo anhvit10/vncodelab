@@ -1,6 +1,10 @@
 //
 package com.vncodelab.service.serviceImpl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -11,10 +15,12 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
+import com.vncodelab.constants.FirebaseConstants;
+import com.vncodelab.entity.Home;
 import com.vncodelab.service.IHomeService;
 
 /**
- * This class is . 
+ * This class is .
  * 
  * @Description: .
  * @author: NVAnh
@@ -33,5 +39,32 @@ public class HomeServiceImpl implements IHomeService {
 		ApiFuture<DocumentSnapshot> documentSnapshotApiFuture = docRef.get();
 		return documentSnapshotApiFuture.get().getData();
 	}
-	
+
+	@Override
+	public void saveObjectFirebase(Home home) throws IOException {
+		home.setLogoUrl("/images/" + home.getImage().getOriginalFilename());
+
+		if (Files.notExists(Paths.get("D:\\eclipse-workspace\\vncodelab\\src\\main\\resources\\static\\images\\"
+				+ home.getImage().getOriginalFilename()))) {
+			byte[] bytes = home.getImage().getBytes();
+			Path path = Paths.get("D:\\eclipse-workspace\\vncodelab\\src\\main\\resources\\static\\images\\");
+			Files.write(path, bytes);
+		}
+
+		home.setImage(null);
+		Firestore dbFirestore = FirestoreClient.getFirestore();
+		dbFirestore.collection(FirebaseConstants.COLLECTION_NAME).document(FirebaseConstants.DOCUMENT_NAME).set(home);
+	}
+
+	@Override
+	public Home getInforFirebase(Map<String, Object> objectFirebase) {
+		String footers = (String) objectFirebase.get("footers");
+		String title = (String) objectFirebase.get("title");
+		String logoUrl = (String) objectFirebase.get("logoUrl");
+		String description = (String) objectFirebase.get("description");
+		Home newInfor = new Home(logoUrl, title, footers, description);
+
+		return newInfor;
+	}
+
 }

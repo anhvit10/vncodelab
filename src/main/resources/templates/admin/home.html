@@ -34,9 +34,11 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th style="text-align: center; width: 20%;">Home Logo</th>
-											<th style="text-align: center; width: 50%;">Home Title</th>
-											<th style="text-align: center; width: 30%;">Home Footer</th>
+											<th style="text-align: center; width: 15%;">Home Logo</th>
+											<th style="text-align: center; width: 25%;">Home Title</th>
+											<th style="text-align: center; width: 25%;">Home
+												Description</th>
+											<th style="text-align: center; width: 25%;">Home Footer</th>
 											<th style="text-align: center; width: 10%;" class="action">Action</th>
 										</tr>
 									</thead>
@@ -44,7 +46,8 @@
 										<tr class="job-items">
 											<td class="application" th:text="${infor.logoUrl}"></td>
 											<td class="application" th:text="${infor.title}"></td>
-											<td class="application" th:text="${infor.footer}"></td>
+											<td class="application" th:text="${infor.description}"></td>
+											<td class="application" th:text="${infor.footers}"></td>
 											<td class="action"><a class="edit btn" title="Edit"
 												th:href="@{'/admin/home/edit'}"><i data-feather="edit"></i></a></td>
 										</tr>

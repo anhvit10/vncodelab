@@ -1,9 +1,7 @@
 //
 package com.vncodelab.admincontroller;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -11,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.google.gson.Gson;
 import com.vncodelab.entity.Home;
 import com.vncodelab.service.serviceImpl.HomeServiceImpl;
 
@@ -42,23 +41,21 @@ public class HomeController {
 		return "admin/home";
 	}
 
-//	@GetMapping("/home/save")
-//	public String create(Model model) throws InterruptedException, ExecutionException {
-//		Map<String, Object> infor = homeServiceImpl.getObjectFirebase();
-//		
-//		model.addAttribute("infor", infor);
-//		model.addAttribute("newInfor", new Home());
-//		return "admin/edit-home";
-//	}
+	@PostMapping("/home/save")
+	public String editHomePage(@ModelAttribute("newInfor") Home newInfor, Model model)
+			throws InterruptedException, ExecutionException, IOException {
+		homeServiceImpl.saveObjectFirebase(newInfor);
+		Map<String, Object> infor = homeServiceImpl.getObjectFirebase();
+
+		model.addAttribute("infor", infor);
+		return "redirect:/admin/home";
+	}
 
 	@GetMapping("/home/edit")
 	public String toEditHomePage(Model model) throws InterruptedException, ExecutionException {
 		Map<String, Object> infor = homeServiceImpl.getObjectFirebase();
-		List<Object> listHome = new ArrayList<>(infor.values());
-		
-		Gson g = new Gson();
-		Home newInfor = g.fromJson(listHome.get(0).toString(), Home.class);
-		
+		Home newInfor = homeServiceImpl.getInforFirebase(infor);
+
 		model.addAttribute("newInfor", newInfor);
 		return "admin/edit-home";
 	}
