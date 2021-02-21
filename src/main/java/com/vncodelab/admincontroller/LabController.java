@@ -47,7 +47,7 @@ public class LabController {
 		Page<Lab> pageLab = labServiceImpl.getPageLab(Integer.parseInt(pageNumber), CommonConstants.LAB_PAGE_SIZE);
 		model.addAttribute("pageNum", Integer.parseInt(pageNumber));
 		model.addAttribute("pageLab", pageLab);
-		model.addAttribute("pageSize", CommonConstants.CATE_PAGE_SIZE);
+		model.addAttribute("pageSize", CommonConstants.LAB_PAGE_SIZE);
 		return "admin/lab";
 	}
 

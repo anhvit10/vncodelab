@@ -996,7 +996,7 @@ paper-ripple.circle .wave-container.paper-ripple {
     position: relative;
 }
 
-.paper-header-panel-0[mode=scroll] #mainContainer.paper-header-panel {;
+.paper-header-panel-0[mode=scroll] #mainContainer.paper-header-panel {
     overflow: visible
 }
 
@@ -1006,7 +1006,7 @@ paper-ripple.circle .wave-container.paper-ripple {
     overflow-y: auto
 }
 
-.paper-header-panel-0[mode=cover] #mainContainer.paper-header-panel {;
+.paper-header-panel-0[mode=cover] #mainContainer.paper-header-panel {
     bottom: 0;
     left: 0;
     position: absolute;

@@ -1,4 +1,4 @@
-package com.vncodelab.service;
+package com.vncodelab.service.serviceImpl;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;

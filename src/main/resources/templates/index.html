@@ -49,35 +49,47 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="../static/css/chat.css" th:href="@{/css/chat.css}" rel="stylesheet"/>
 
-
+<link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}"
+	rel="stylesheet" />
+<link href="../static/css/main.css" th:href="@{/css/main.css}"
+	rel="stylesheet" />
+<link href="../static/css/login-register.css"
+	th:href="@{/css/login-register.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 
-<body id="app" is="body-bind" class="fullbleed" style="padding-top: 0px;">
+<body id="app" is="body-bind" class="fullbleed"
+	style="padding-top: 0px;">
 
+	<paper-header-panel id="main" mode="standard" main="" at-top=""
+		class="x-scope paper-header-panel-0">
 
-<paper-header-panel id="main" mode="standard" main="" at-top="" class="x-scope paper-header-panel-0">
-
-    <div id="mainToolbar" class="paper-header" style="margin-top: 0px;">
-        <div class="site-width layout horizontal">
-            <a href="/">
-                <img src="../static/images/developers-logo.svg" th:src="@{/images/developers-logo.svg}"
-                     class="logo-icon" alt="Google Developers Logo">
-                <img src="../static/images/lockup_developers_light_color.svg"
-                     th:src="@{/images/lockup_developers_light_color.svg}" class="logo-devs"
-                     alt="Google Developers Workmark">
-            </a>
-            <div id="searchbar">
-                <paper-input-container no-label-float="" class="x-scope paper-input-container-0">
-                    <div class="input-content style-scope paper-input-container">
-                        <paper-icon-button prefix="" icon="search" role="button" tabindex="0" aria-disabled="false"
-                                           class="x-scope paper-icon-button-0">
-                            <iron-icon id="icon" class="style-scope paper-icon-button x-scope iron-icon-0">
-                                <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
-                                     class="style-scope iron-icon"
-                                     style="pointer-events: none; display: block; width: 100%; height: 100%;">
+	<div id="mainToolbar" class="paper-header" style="margin-top: 0px;">
+		<div class="site-width layout horizontal">
+			<a href="/"> <img src="../static/images/developers-logo.svg"
+				th:src="@{/images/developers-logo.svg}" class="logo-icon"
+				alt="Google Developers Logo"> <img
+				src="../static/images/lockup_developers_light_color.svg"
+				th:src="${infor.logoUrl}" class="logo-devs"
+				alt="Google Developers Workmark">
+			</a>
+			<div id="searchbar">
+				<paper-input-container no-label-float=""
+					class="x-scope paper-input-container-0">
+				<div class="input-content style-scope paper-input-container">
+					<paper-icon-button prefix="" icon="search" role="button"
+						tabindex="0" aria-disabled="false"
+						class="x-scope paper-icon-button-0"> <iron-icon
+						id="icon"
+						class="style-scope paper-icon-button x-scope iron-icon-0">
+					<svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet"
+						class="style-scope iron-icon"
+						style="pointer-events: none; display: block; width: 100%; height: 100%;">
                                     <g class="style-scope iron-icon">
-                                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
-                                              class="style-scope iron-icon"></path>
+                                        <path
+							d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+							class="style-scope iron-icon"></path>
                                     </g>
                                 </svg>
 
@@ -185,13 +197,99 @@
                             <option th:each="cate : ${cateList}" th:value="${cate.getCateID()}"
                                     th:text="${cate.getName()}"></option>
                         </select>
+			<div class="btn-group" id="login">
+				<button type="button" class="btn btn-primary rounded" id="btnLogin">Đăng
+					nhập</button>
+				<button type="button"
+					class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+					id="btnLoginDropDown" data-bs-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					<span class="sr-only"></span>
+				</button>
+				<div class="dropdown-menu" id="dropdown-signout">
+					<a class="dropdown-item" href="#">Tài khoản</a> <a
+						class="dropdown-item" href="#">Lab của bạn</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#" id="signout">Đăng xuất</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="col-form-label">Description:</label>
-                        <textarea class="form-control" id="description" required></textarea>
-                    </div>
-
+	<div id="mainPanel" class="style-scope paper-header-panel">
+		<div id="mainContainer" class="flex style-scope paper-header-panel">
+			<header id="banner">
+				<div class="site-width">
+					<h2 class="banner-title" th:utext="${infor.title}"></h2>
+					<div class="banner-description">
+						<p class="banner-info" th:utext="${infor.description}">
+							<br> <a href="https://github.com/googlecodelabs/tools">Tìm
+								hiểu thêm</a>
+					</div>
+				</div>
+			</header>
+			<main>
+				<div id="filters"
+					class="site-width layout horizontal center justified">
+					<div id="sortby">
+						<paper-tabs selected="0" noink="" role="tablist" tabindex="0"
+							class="x-scope paper-tabs-0"> <a
+							th:each="cate : ${cateList}"
+							th:href="@{/cate/{path}(path=*{cate.getCateID()})}"><span
+							th:text="*{cate.getName()}"></span></a> </paper-tabs>
+					</div>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle " type="button"
+							id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">More</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a th:each="cate : ${cateListMore}" class="dropdown-item"
+								th:href="@{/cate/{path}(path=*{cate.getCateID()})}"><span
+								th:text="*{cate.getName()}"></span></a>
+						</div>
+					</div>
+				</div>
+				<card-sorter id="cards" class="site-width"> <a
+					th:each="lab : ${labList}"
+					th:href="@{/lab/{path}(path=*{lab.getDocID()})}"
+					class="codelab-card category-web">
+					<h2 th:text="*{lab.getName()}"></h2>
+					<h3 th:text="*{lab.getDescription()}"></h3>
+					<div class="card-footer">
+						<div class="category-icon web-icon"></div>
+						<paper-button class="web-bg">Start</paper-button>
+					</div>
+				</a> <a href="#" class="codelab-card codelab-card-add"
+					data-toggle="modal" data-target="#exampleModal"> <img
+					width="65px" height="65px" src="../static/images/add.svg"
+					th:src="@{/images/add.svg}" />
+				</a> </card-sorter>
+			</main>
+			<footer id="footer">
+				<div class="footer-wrapper site-width" th:utext="${infor.footers}">
+				</div>
+			</footer>
+			<div class="footerbar">
+				<div class="site-width layout horizontal center justified">
+					<span> <a href="https://developers.google.com/site-terms/">Terms</a>
+						&nbsp; | &nbsp; <a href="https://www.google.com/intl/en/privacy/">Privacy</a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	</paper-header-panel>
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add Lab</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
                 </div>
                 <div class="modal-footer">
                     <span class="mr-auto text-danger" id="modal-error"></span>
@@ -288,18 +386,128 @@
     <div class="toast-body" id="toast-body">
     </div>
 </div>
+				<form id="add-form" th:action="@{/save}">
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="docID" class="col-form-label">Google Doc Link
+								or ID:</label> <input type="text" class="form-control" id="docID"
+								required>
+						</div>
+						<div class="form-group">
+							<label for="cateID">Category:</label> <select
+								class="form-control" id="cateID">
+								<option th:each="cate : ${cateList}"
+									th:value="${cate.getCateID()}" th:text="${cate.getName()}"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="description" class="col-form-label">Description:</label>
+							<textarea class="form-control" id="description" required></textarea>
+						</div>
 
+					</div>
+					<div class="modal-footer">
+						<span class="mr-auto text-danger" id="modal-error"></span>
+						<button type="submit" class="btn btn-primary" id="add-lab-button">Add</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--MODAL LOGIN-->
+	<div class="modal fade login" id="loginModal">
+		<div class="modal-dialog login animated">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Đăng nhập với</h5>
+				</div>
+				<div class="modal-body">
+					<div class="box">
+						<div class="content">
+							<div class="social">
+								<a id="google_login" class="circle google" href="#"> <i
+									class="bi bi-google"></i>
+								</a> <a id="facebook_login" class="circle facebook" href="#"> <i
+									class="bi bi-facebook"></i>
+								</a> <a class="circle github" href="#"> <i class="bi bi-twitter"></i>
+								</a>
+							</div>
+							<div class="division">
+								<div class="line l"></div>
+								<span>hoặc</span>
+								<div class="line r"></div>
+							</div>
+							<div class="error"></div>
+							<div class="form loginBox">
+								<form method="" action="" accept-charset="UTF-8">
+									<input id="email" class="form-control" type="text"
+										placeholder="Email" name="email"> <input id="password"
+										class="form-control" type="password" placeholder="Password"
+										name="password"> <input
+										class="btn btn-default btn-login" type="button" value="Login"
+										onclick="loginAjax()">
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="box">
+						<div class="content registerBox" style="display: none;">
+							<div class="form">
+								<form method="" html="{:multipart=>true}" data-remote="true"
+									action="" accept-charset="UTF-8">
+									<input id="email" class="form-control" type="text"
+										placeholder="Email" name="email"> <input id="password"
+										class="form-control" type="password" placeholder="Password"
+										name="password"> <input id="password_confirmation"
+										class="form-control" type="password"
+										placeholder="Repeat Password" name="password_confirmation">
+									<input class="btn btn-default btn-register" type="button"
+										value="Create account" name="commit">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="forgot login-footer">
+						<span>Looking to <a href="javascript: showRegisterForm();">create
+								an account</a> ?
+						</span>
+					</div>
+					<div class="forgot register-footer" style="display: none">
+						<span>Already have an account?</span> <a
+							href="javascript: showLoginForm();">Login</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="toast" id="toast" role="alert" aria-live="assertive"
+		aria-atomic="true" data-delay="3000">
+		<div class="toast-header">
+			<strong class="mr-auto" id="toast-title">Bootstrap</strong>
+			<button type="button" data-delay="2000" class="ml-2 mb-1 close"
+				data-dismiss="toast" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="toast-body" id="toast-body"></div>
+	</div>
 
-<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-auth.js"></script>
+	<script
+		src="https://www.gstatic.com/firebasejs/8.2.7/firebase-database.js"></script>
 
-<script type="text/javascript" src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
-<script type="text/javascript" src="../static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
+	<script type="text/javascript" src="../static/js/jquery.min.js"
+		th:src="@{/js/jquery.min.js}"></script>
+	<script type="text/javascript" src="../static/js/bootstrap.bundle.js"
+		th:src="@{/js/bootstrap.bundle.js}"></script>
 
-
-<script type="text/javascript" src="../static/js/login.js" th:src="@{/js/login.js}"></script>
-<script type="text/javascript" src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+	<script type="text/javascript" src="../static/js/login.js"
+		th:src="@{/js/login.js}"></script>
+	<script type="text/javascript" src="../static/js/index.js"
+		th:src="@{/js/index.js}"></script>
 
 </body>
 </html>
