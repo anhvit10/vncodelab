@@ -9,11 +9,13 @@ import java.util.concurrent.ExecutionException;
 
 import com.google.gson.Gson;
 import com.vncodelab.entity.Cate;
+import com.vncodelab.entity.Home;
 import com.vncodelab.entity.Lab;
 import com.vncodelab.json.LabInfo;
 import com.vncodelab.model.AjaxResponseBody;
 import com.vncodelab.respository.CateRespository;
 import com.vncodelab.respository.LabRespository;
+import com.vncodelab.service.serviceImpl.HomeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -116,5 +118,5 @@ public class MainController {
 	@GetMapping("/test")
 	public String test() {
 		return "test";
-	}=
+	}
 }

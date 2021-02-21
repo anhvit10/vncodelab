@@ -115,8 +115,7 @@
                     <h2 class="banner-title">Welcome to VnCodelab</h2>
                     <div class="banner-description">
                         <p class="banner-info">
-                            Nơi cung cấp các bài hướng dẫn về lập trình. Các bài học được viết theo các dạng các bài
-                            thực hành (Labs) theo bước, giúp bạn dễ dàng làm theo và hiểu hơn về ngôn ngữ hay công nghệ.
+							<span th:text="${infor.description}"></span>
                             <br><a href="https://github.com/googlecodelabs/tools">Tìm hiểu thêm</a>
                     </div>
                 </div>
@@ -158,7 +157,7 @@
             </main>
             <footer id="footer">
                 <div class="footer-wrapper site-width">
-                    Dự án Codelabs
+					<span th:text="${infor.footers}"></span>
                 </div>
             </footer>
             <div class="footerbar">
