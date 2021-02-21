@@ -9,7 +9,7 @@
         <relativePath/>
     </parent>
     <groupId>com.jquiz</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>ROOT</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
     <name>VnCodelab</name>
@@ -31,7 +31,11 @@
             <artifactId>firebase-admin</artifactId>
             <version>6.8.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -44,11 +48,11 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
-            <version>2.2.6.RELEASE</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-jetty</artifactId>-->
+<!--            <version>2.2.6.RELEASE</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
