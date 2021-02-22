@@ -24,9 +24,6 @@
     background: white;
 }
 
-#profilePictureBig{
-    padding: 20px;
-}
 .profile{
     display: flex;
     flex-wrap: wrap;

@@ -1,27 +1,20 @@
 var refUsers;
 var refChat;
-
-var labid = "1EEGARIc9dEj9mpnmKoYP8n4EA9KNH9qR0W2c6CYEWT0";
-var roomid = '7OkmUq'
+var labid = "test_lab";
+var roomid = 'test_room'
 
 $(function () {
-
+    page = "lab";
+    $('.toast').toast()
     $('#codelab-feedback').hide();
     $("#topButton").detach().appendTo("#codelab-title");
-
     $("#creatroom").click(function () {
         $('#exampleModal').modal('show')
     });
-    $('#create-room-button').click(function (e) {
-        createRoom(labid, makeid(6));
-    })
+
     $('.steps ol li').click(function (e) {
         updateStep($(this).index());
     });
-
-    $('.toast').toast()
-
-
     var firstEnterRoom = true
     $('#btnRoom').click(function () {
         if (firstEnterRoom) {
@@ -29,84 +22,100 @@ $(function () {
             firstEnterRoom = false;
         }
     })
-    $('.steps ol li a').append("\n" +
-        "<span class=\"badge badge-secondary bg-secondary my-badge invisible\" onmouseover=\"hoverdiv(this,'divtoshow')\" onmouseout=\"hoverdiv(this,'divtoshow')\">0</span>")
-
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            currentUser = user;
-            afterLogin(user);
-            refUsers = firebase.database().ref('/labs/' + labid + '/' + roomid + '/users');
-            refUsers.on('value', (snapshot) => {
-                const data = snapshot.val();
-                var count = []
-                var totalUser = 0;
-                $('#usersChat').empty()
-                var userinStep = "";
-                for (var uid in data) {
-                    var step = data[uid].step;
-                    if (count[step] == undefined)
-                        count[step] = {count: 0, user: ""};
-                    count[step].count++;
-                    count[step].user = count[step].user + data[uid].name + "<br>";
-                    totalUser++;
-                    //Add to chat room
-                    if (currentUser.uid != uid)
-                        $('#usersChat').append("<a href='#' onclick='showChat(this,\"" + uid + "\")' class=\"list-group-item list-group-item-action rounded-0 media uchat\"><img src=\"" + data[uid].photo + "\" alt=\"user\" width=\"40\" height=\"40\"  class=\"rounded-circle\"><div class=\"media-body\">" + data[uid].name + "</div></a>")
-
-                }
-                $('.speech-bubble').html(userinStep)
-
-                for (let i = 1; i <= getNumberOfSteps(); i++) {
-                    if (count[i - 1] == undefined)
-                        $('li:nth-child(' + i + ') > a > span.badge').addClass("invisible")
-                    else {
-                        $('li:nth-child(' + i + ') > a > span.badge').removeClass("invisible")
-                        $('li:nth-child(' + i + ') > a > span.badge').text(count[i - 1].count);
-                        $('li:nth-child(' + i + ') > a > span.badge').attr("user", count[i - 1].user)
-
-                    }
-                }
-                $('#numOnline').text(totalUser)
-            });
-            var leave = {};
-            leave['users/' + currentUser.uid] = null;
-            refUsers.onDisconnect().update(leave);
-            updateStep(getSelectedStep());
-            //Listen to Notification
-            var first = true;
-            firebase.database().ref('/notifies/' + currentUser.uid).on('value', (snapshot) => {
-                if (!first) {
-                    const data = snapshot.val();
-                    if (!$("#collapse-online").hasClass("show") || ($("#collapse-online").hasClass("show") && sendTo !== data.uid)) {
-                        $("#toastTitle").text(data.uname);
-                        $("#toastBody").text(data.message);
-                        $('.toast').toast('show');
-                    }
-                }
-                first = false;
-            });
-
-            var firstAll = true;
-            firebase.database().ref('/labs/' + labid + '/' + roomid + '/notifies/all').on('value', (snapshot) => {
-                if (!firstAll) {
-                    if (!$("#collapse-online").hasClass("show") || ($("#collapse-online").hasClass("show") && sendTo !== "all")) {
-                        const data = snapshot.val();
-                        $("#toastTitle").text("Chat room");
-                        $("#toastBody").text(data.message);
-                        $('.toast').toast('show');
-                    }
-                }
-                firstAll = false;
-            });
-
-
-        } else {
-            // No user is signed in.
-        }
-    });
+    $('.steps ol li a').append("<span class=\"badge badge-secondary bg-secondary my-badge invisible\" onmouseover=\"hoverdiv(this,'divtoshow')\" onmouseout=\"hoverdiv(this,'divtoshow')\">0</span>")
+    $('#main').hide();
+    $('#drawer').hide();
+    $('#btnRoom').hide();
 
 });
+
+function enterRoom() {
+    $('#main').show();
+    $('#drawer').show();
+    $('#btnRoom').show();
+    refUsers = firebase.database().ref('/labs/' + labid + '/' + roomid + '/users');
+    refUsers.on('value', (snapshot) => {
+        const data = snapshot.val();
+        var count = []
+        var totalUser = 0;
+        $('#usersChat').empty()
+        var userinStep = "";
+        for (var uid in data) {
+            var step = data[uid].step;
+            if (count[step] == undefined)
+                count[step] = {count: 0, user: ""};
+            count[step].count++;
+            count[step].user = count[step].user + data[uid].name + "<br>";
+            totalUser++;
+            //Add to chat room
+            if (currentUser.uid != uid) {
+                var avatar = "<img src=\"" + data[uid].photo + "\" alt=\"user\" width=\"40\" height=\"40\"  class=\"rounded-circle\">";
+                if (!data[uid].photo && data[uid].name) {
+                    var avatar = "<div><div class=\"friend\">" + data[uid].name + "</div></div>"
+
+                }
+                $('#usersChat').append("<a href='#' onclick='showChat(this,\"" + uid + "\")' class=\"list-group-item list-group-item-action rounded-0 media uchat\">" + avatar + "<div class=\"media-body\">" + data[uid].name + "</div></a>")
+                if (!data[uid].photo && data[uid].name) {
+                    $('.friend').nameBadge();
+                }
+            }
+        }
+        $('.speech-bubble').html(userinStep)
+        for (let i = 1; i <= getNumberOfSteps(); i++) {
+            if (count[i - 1] == undefined)
+                $('li:nth-child(' + i + ') > a > span.badge').addClass("invisible")
+            else {
+                $('li:nth-child(' + i + ') > a > span.badge').removeClass("invisible")
+                $('li:nth-child(' + i + ') > a > span.badge').text(count[i - 1].count);
+                $('li:nth-child(' + i + ') > a > span.badge').attr("user", count[i - 1].user)
+            }
+        }
+        $('#numOnline').text(totalUser)
+    });
+    var leave = {};
+    leave[currentUser.uid] = null;
+    refUsers.onDisconnect().update(leave);
+    updateStep(getSelectedStep());
+    //Listen to Notification
+    var first = true;
+    firebase.database().ref('/notifies/' + currentUser.uid).on('value', (snapshot) => {
+        if (!first) {
+            const data = snapshot.val();
+            if (!$("#collapse-online").hasClass("show") || ($("#collapse-online").hasClass("show") && sendTo !== data.uid)) {
+                $("#toastTitle").text(data.uname);
+                $("#toastBody").text(data.message);
+                $('.toast').toast('show');
+            }
+        }
+        first = false;
+    });
+
+    var firstAll = true;
+    firebase.database().ref('/labs/' + labid + '/' + roomid + '/notifies/all').on('value', (snapshot) => {
+        if (!firstAll) {
+            if (!$("#collapse-online").hasClass("show") || ($("#collapse-online").hasClass("show") && sendTo !== "all")) {
+                const data = snapshot.val();
+                $("#toastTitle").text("Chat room");
+                $("#toastBody").text(data.message);
+                $('.toast').toast('show');
+            }
+        }
+        firstAll = false;
+    });
+}
+
+function logoutRoom() {
+    var leave = {};
+    leave[currentUser.uid] = null;
+    refUsers.update(leave);
+    $('#main').hide();
+    $('#drawer').hide();
+    $('#btnRoom').hide();
+    if (refUsers)
+        refUsers.off();
+    if (refChat)
+        refChat.off();
+}
 
 //Chat
 var chatroom;
@@ -133,7 +142,6 @@ function showChat(me, uid) {
             chatroom = currentUser.uid + "-" + uid
         refChat = firebase.database().ref('/chats/' + chatroom);  //Private chat
     }
-
     refChat.on('child_added', (data) => {
         showMessage(data.val());
     });
@@ -186,12 +194,19 @@ function sendMessage() {
 function showMessage(data) {
     if (currentUser.uid === data.uid)
         $('#chatMessages').append("<div class=\"ml-auto d-flex justify-content-end\"><div class=\"chat-body\"><div class=\"bg-primary rounded-pill py-2 px-3  text-white text-small\">" + data.message + "</div><span class=\"text-muted d-flex justify-content-end chat-time\">" + time_ago(data.time) + "</span></div></div>\n")
-    else
-        $('#chatMessages').append("<div class=\"media w-75 \"><img src=\"" + data.photo + "\"  width=\"40\" height=\"40\" class=\"rounded-circle\"><div class=\"media-body ml-3\"><div class=\"bg-light rounded-pill py-2 px-3\"><span class=\"text-small mb-0 text-muted\">" + data.message + "</span></div><p class=\"text-muted chat-time\">" + time_ago(data.time) + "</p></div></div>");
+    else {
+        var avatar = "<img src=\"" + data.photo + "\" alt=\"user\" width=\"40\" height=\"40\"  class=\"rounded-circle\">";
+        if (!data.photo && data.name) {
+            var avatar = "<div><div class=\"friend\">" + data.name + "</div></div>"
+        }
+        $('#chatMessages').append("<div class=\"media w-75 \">" + avatar + "<div class=\"media-body ml-3\"><div class=\"bg-light rounded-pill py-2 px-3\"><span class=\"text-small mb-0 text-muted\">" + data.message + "</span></div><p class=\"text-muted chat-time\">" + time_ago(data.time) + "</p></div></div>");
+        if (!data.photo && data.name) {
+            $('.friend').nameBadge();
+        }
+    }
     var objDiv = document.getElementById("chatMessages");
     objDiv.scrollTop = objDiv.scrollHeight;
 }
-
 
 function getNumberOfSteps() {
     var radioButtons = $(".steps ol li");
@@ -212,112 +227,26 @@ function updateStep(step) {
         change[currentUser.uid] = {
             step: step,
             time: firebase.database.ServerValue.TIMESTAMP,
-            name: currentUser.displayName,
+            name: $("#profileName").text(),
             photo: currentUser.photoURL
         };
         refUsers.update(change);
     }
 }
 
-function createRoom(docID, roomID) {
-    firebase.database().ref('labs/' + docID + "/" + roomID).set({
+function createRoom() {
+    firebase.database().ref('labs/' + docID + "/" + makeid(6)).set({
         create_time: firebase.database.ServerValue.TIMESTAMP
     });
 }
 
-function makeid(length) {
-    var result = '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++)
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    return result;
-}
-
-function writeLab(docID, room, user, step) {
-    firebase.database().ref(docID + '/' + room).set({
-        user: user,
-        step: step,
-    });
-}
-
-
-function time_ago(time1) {
-
-    time = new Date(time1);
-
-    return TimeAgo.inWords(time.getTime());
-}
-
-var TimeAgo = (function () {
-    var self = {};
-
-    // Public Methods
-    self.locales = {
-        prefix: '',
-        sufix: 'ago',
-
-        seconds: 'less than a min',
-        minute: 'about a minute',
-        minutes: '%d minutes',
-        hour: 'about an hour',
-        hours: 'about %d hours',
-        day: 'a day',
-        days: '%d days',
-        month: 'about a month',
-        months: '%d months',
-        year: 'about a year',
-        years: '%d years'
-    };
-
-    self.inWords = function (timeAgo) {
-        var seconds = Math.floor((new Date() - parseInt(timeAgo)) / 1000),
-            separator = this.locales.separator || ' ',
-            words = this.locales.prefix + separator,
-            interval = 0,
-            intervals = {
-                year: seconds / 31536000,
-                month: seconds / 2592000,
-                day: seconds / 86400,
-                hour: seconds / 3600,
-                minute: seconds / 60
-            };
-
-        var distance = this.locales.seconds;
-
-        for (var key in intervals) {
-            interval = Math.floor(intervals[key]);
-
-            if (interval > 1) {
-                distance = this.locales[key + 's'];
-                break;
-            } else if (interval === 1) {
-                distance = this.locales[key];
-                break;
-            }
-        }
-
-        distance = distance.replace(/%d/i, interval);
-        words += distance + separator + this.locales.sufix;
-
-        return words.trim();
-    };
-
-    return self;
-}());
-
 function hoverdiv(e, divid) {
-
     var left = 40 + $(e).offset().left + "px";
     var top = $(e).offset().top + "px";
-
-
     var div = document.getElementById(divid);
     div.innerHTML = $(e).attr("user")
-
     div.style.left = left;
     div.style.top = top;
-
     $("#" + divid).toggle();
     return false;
 }
