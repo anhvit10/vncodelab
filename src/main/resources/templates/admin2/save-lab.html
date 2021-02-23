@@ -114,7 +114,7 @@
         </li>
 
         <!-- Nav Item - Home Information -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" th:href="@{/admin/home}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Home Information</span></a>
@@ -128,7 +128,7 @@
         </li>
 
         <!-- Nav Item - Laboratories -->
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" th:href="@{/admin/laboratory}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Laboratories</span></a>
@@ -420,9 +420,9 @@
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">HTML</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control"
-                                       placeholder="Html here !" th:field="*{html}"
-                                       required="required">
+                                <textarea type="text" class="form-control" cols="100"
+                                          placeholder="Html here !" th:field="*{html}"
+                                          required="required"></textarea>
                             </div>
                         </div>
 
