@@ -48,7 +48,7 @@ public class LabController {
 		model.addAttribute("pageNum", Integer.parseInt(pageNumber));
 		model.addAttribute("pageLab", pageLab);
 		model.addAttribute("pageSize", CommonConstants.LAB_PAGE_SIZE);
-		return "admin/lab";
+		return "admin2/lab";
 	}
 
 	@GetMapping(value = "/laboratory/new")
@@ -56,7 +56,7 @@ public class LabController {
 		List<Cate> allCate = cateServiceImpl.findAllCate();
 		model.addAttribute("allCate", allCate);
 		model.addAttribute("newLaboratory", new Lab());
-		return "admin/save-lab";
+		return "admin2/save-lab";
 	}
 
 	@PostMapping(value = "/laboratory/save")
@@ -80,6 +80,6 @@ public class LabController {
 		model.addAttribute("allCate", allCate);
 		model.addAttribute("newLaboratory", lab);
 		model.addAttribute("labId", lab.getLabID());
-		return "admin/save-lab";
+		return "admin2/save-lab";
 	}
 }

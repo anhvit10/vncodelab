@@ -33,12 +33,27 @@ public class HomeController {
 	@Autowired
 	private HomeServiceImpl homeServiceImpl;
 
+	@GetMapping("")
+	public String toIndex() {
+		return "admin2/index";
+	}
+
+	@GetMapping("/tables")
+	public String toTables() {
+		return "admin2/tables";
+	}
+
+	@GetMapping("/login")
+	public String toLogin() {
+		return "admin2/login";
+	}
+
 	@GetMapping("/home")
 	public String get(Model model) throws InterruptedException, ExecutionException {
 		Map<String, Object> infor = homeServiceImpl.getObjectFirebase();
 
 		model.addAttribute("infor", infor);
-		return "admin/home";
+		return "admin2/home";
 	}
 
 	@PostMapping("/home/save")
@@ -57,7 +72,7 @@ public class HomeController {
 		Home newInfor = homeServiceImpl.getInforFirebase(infor);
 
 		model.addAttribute("newInfor", newInfor);
-		return "admin/edit-home";
+		return "admin2/edit-home";
 	}
 
 }

@@ -41,13 +41,13 @@ public class CateController {
 		model.addAttribute("pageNum", Integer.parseInt(pageNumber));
 		model.addAttribute("pageCate", pageCategories);
 		model.addAttribute("pageSize", CommonConstants.CATE_PAGE_SIZE);
-		return "admin/cate";
+		return "admin2/cate";
 	}
 
 	@GetMapping(value = "/cate/new")
 	public String toSaveCatePage(Model model) {
 		model.addAttribute("newCategory", new Cate());
-		return "admin/save-cate";
+		return "admin2/save-cate";
 	}
 
 	@PostMapping(value = "/cate/save")
@@ -68,6 +68,6 @@ public class CateController {
 		Cate cate = cateServiceImpl.getCateById(Integer.parseInt(cateID));
 		model.addAttribute("newCategory", cate);
 		model.addAttribute("cateId", cate.getCateID());
-		return "admin/save-cate";
+		return "admin2/save-cate";
 	}
 }
