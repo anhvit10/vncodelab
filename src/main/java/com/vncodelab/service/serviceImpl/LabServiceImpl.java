@@ -1,6 +1,7 @@
 //
 package com.vncodelab.service.serviceImpl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class LabServiceImpl implements ILabService {
 	private LabRespository labRespository;
 
 	@Override
-	public Page<Lab> getPageLab(Integer pageNumber, Integer pageSize) {
-		Page<Lab> pageLabs = labRespository.findAll(PageRequest.of(pageNumber - 1, pageSize));
-		return pageLabs;
+	public List<Lab> getAllLabs() {
+		List<Lab> lstLabs = labRespository.findAll();
+		return lstLabs;
 	}
 
 	@Override

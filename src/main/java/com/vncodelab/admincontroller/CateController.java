@@ -16,6 +16,8 @@ import com.vncodelab.constants.CommonConstants;
 import com.vncodelab.entity.Cate;
 import com.vncodelab.service.serviceImpl.CateServiceImpl;
 
+import java.util.List;
+
 /**
  * This class is .
  * 
@@ -34,13 +36,9 @@ public class CateController {
 	private CateServiceImpl cateServiceImpl;
 
 	@GetMapping(value = "/cate")
-	public String getCate(Model model, @RequestParam(defaultValue = "1", value = "pageNumber") String pageNumber)
-			throws NumberFormatException {
-		Page<Cate> pageCategories = cateServiceImpl.getPageCate(Integer.parseInt(pageNumber),
-				CommonConstants.CATE_PAGE_SIZE);
-		model.addAttribute("pageNum", Integer.parseInt(pageNumber));
-		model.addAttribute("pageCate", pageCategories);
-		model.addAttribute("pageSize", CommonConstants.CATE_PAGE_SIZE);
+	public String getCate(Model model) {
+		List<Cate> lstCategories = cateServiceImpl.getAllCates();
+		model.addAttribute("pageCate", lstCategories);
 		return "admin2/cate";
 	}
 
@@ -57,14 +55,13 @@ public class CateController {
 	}
 
 	@GetMapping(value = "/cate/delete/{cateID}")
-	public String deleteCate(@PathVariable("cateID") String cateID,
-			@RequestParam(value = "pageNum") Integer pageNumber) throws Exception, NumberFormatException {
+	public String deleteCate(@PathVariable("cateID") String cateID) throws Exception {
 		cateServiceImpl.deleteCate(Integer.parseInt(cateID));
-		return "redirect:/admin/cate?pageNumber=" + pageNumber;
+		return "redirect:/admin/cate";
 	}
 
 	@GetMapping(value = "/cate/{cateID}")
-	public String toEditCatePage(Model model, @PathVariable("cateID") String cateID) throws Exception, NumberFormatException {
+	public String toEditCatePage(Model model, @PathVariable("cateID") String cateID) throws Exception {
 		Cate cate = cateServiceImpl.getCateById(Integer.parseInt(cateID));
 		model.addAttribute("newCategory", cate);
 		model.addAttribute("cateId", cate.getCateID());

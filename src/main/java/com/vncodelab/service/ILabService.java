@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 
 import com.vncodelab.entity.Lab;
 
+import java.util.List;
+
 /**
  * This class is .
  * 
@@ -23,5 +25,5 @@ public interface ILabService {
 	
 	Lab getLabById(Integer labID) throws Exception;
 
-	Page<Lab> getPageLab(Integer pageNum, Integer pageSize);
+	List<Lab> getAllLabs();
 }
