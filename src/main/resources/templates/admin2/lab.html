@@ -382,9 +382,9 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="width:250px;table-layout:fixed;">
                                 <thead>
-                                <tr>
+                                <tr style="height:1em;">
                                     <th>Document ID</th>
                                     <th>Document Name</th>
                                     <th>Description</th>
@@ -395,7 +395,7 @@
                                 </tr>
                                 </thead>
                                 <tfoot>
-                                <tr>
+                                <tr style="height:1em;">
                                     <th>Document ID</th>
                                     <th>Document Name</th>
                                     <th>Description</th>
@@ -408,9 +408,9 @@
                                 <tbody>
                                 <tr th:each="lab : ${pageLab}">
                                     <td th:text="${lab.docID}"></td>
-                                    <td th:text="${lab.name}"></td>
-                                    <td th:text="${lab.description}"></td>
-                                    <td th:text="${lab.html}"></td>
+                                    <td th:text="${lab.name}" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"></td>
+                                    <td th:text="${lab.description}" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"></td>
+                                    <td th:text="${lab.html}" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"></td>
                                     <td th:text="${lab.cateID}"></td>
                                     <td class="action"><a class="edit btn" title="Edit"
                                                           th:href="@{'/admin/laboratory/' + ${lab.labID}}"><i
