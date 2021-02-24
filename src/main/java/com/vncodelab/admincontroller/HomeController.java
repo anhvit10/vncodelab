@@ -2,23 +2,24 @@
 package com.vncodelab.admincontroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 
+import com.vncodelab.service.serviceImpl.DashboardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.vncodelab.entity.Home;
 import com.vncodelab.service.serviceImpl.HomeServiceImpl;
 
 /**
  * This class is .
- * 
+ *
  * @Description: .
  * @author: NVAnh
  * @create_date: Feb 19, 2021
@@ -33,12 +34,19 @@ public class HomeController {
 	@Autowired
 	private HomeServiceImpl homeServiceImpl;
 
+	@Autowired
+	private DashboardServiceImpl dashboardService;
+
 	@GetMapping("")
-	public String toIndex() {
+	public String toIndex(Model model) {
+		Integer totalCates = dashboardService.getTotalCates();
+		Integer totalLabs = dashboardService.getTotalLabs();
+		model.addAttribute("totalcates", totalCates);
+		model.addAttribute("totallabs", totalLabs);
 		return "admin2/index";
 	}
 
-	@GetMapping("/tables")
+    @GetMapping("/tables")
 	public String toTables() {
 		return "admin2/tables";
 	}
