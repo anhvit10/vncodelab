@@ -30,9 +30,9 @@ public class CateServiceImpl implements ICateService {
 	private CateRespository cateRespository;
 
 	@Override
-	public Page<Cate> getPageCate(Integer pageNumber, Integer pageSize) {
-		Page<Cate> pageCates = cateRespository.findAll(PageRequest.of(pageNumber - 1, pageSize));
-		return pageCates;
+	public List<Cate> getAllCates() {
+		List<Cate> lstCates = cateRespository.findAll();
+		return lstCates;
 	}
 
 	@Override

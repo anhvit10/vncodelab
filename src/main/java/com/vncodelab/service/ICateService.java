@@ -27,5 +27,5 @@ public interface ICateService {
 
 	Cate getCateById(Integer cateID) throws Exception;
 
-	Page<Cate> getPageCate(Integer pageNum, Integer pageSize);
+	List<Cate> getAllCates();
 }

@@ -10,7 +10,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" th:href="@{/admin}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -22,7 +22,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" th:href="@{/templates/admin}">
+            <a class="nav-link" th:href="@{/admin}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -403,8 +403,8 @@
                                     <th>Delete</th>
                                 </tr>
                                 </tfoot>
-                                <tbody th:each="cate : ${pageCate}">
-                                <tr>
+                                <tbody>
+                                <tr th:each="cate : ${pageCate}">
                                     <td th:text="${cate.cateID}"></td>
                                     <td th:text="${cate.name}"></td>
                                     <td th:text="${cate.description}"></td>
@@ -414,31 +414,11 @@
                                             class="fas fa-edit">&#xe254;</i></a></td>
                                     <td class="action"><a class="remove btn"
                                                           title="Delete"
-                                                          th:href="@{'/admin/cate/delete/' + ${cate.cateID} + '?pageNum=' + ${pageNum}}"><i
+                                                          th:href="@{'/admin/cate/delete/' + ${cate.cateID}}"><i
                                             class="fa fa-trash"></i></a></td>
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="pagination-list text-center"
-                                 th:if="${pageCate.hasContent()}">
-                                <nav class="navigation pagination">
-                                    <div class="nav-links">
-											<span class="prev page-numbers"
-                                                  th:if="${pageCate.hasPrevious()}"> <a
-                                                    th:href="@{'/admin/cate?pageNumber=' + ${pageCate.number}}">Pre</a>
-											</span> <span class="page-numbers"
-                                                          th:each="i: ${#numbers.sequence(0, pageCate.totalPages - 1)}">
-												<span th:if="${pageCate.number == i}" class="selected">[[${i}+1]]</span>
-												<span th:unless="${pageCate.number == i}"> <a
-                                                        th:href="@{'/admin/cate?pageNumber='+${i+1}}">[[${i}+1]]</a>
-											</span>
-											</span> <span class="next page-numbers"
-                                                          th:if="${pageCate.hasNext()}"> <a
-                                            th:href="@{'/admin/cate?pageNumber='+${pageCate.number+2}}">Next</a>
-											</span>
-                                    </div>
-                                </nav>
-                            </div>
                         </div>
                     </div>
                 </div>
