@@ -1,85 +1,83 @@
 package com.vncodelab.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Lab {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "labID")
-	private int labID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "labID")
 
-	@Column(unique = true)
-	private String docID;
+    private int labID;
 
-	private String name;
+    @Column(unique = true)
 
-	private String description;
+    private String docID;
 
-	@Column(length = 1000000)
-	private String html;
+    private String name;
 
-	private int cateID;
+    private String description;
 
-	public int getLabID() {
-		return labID;
-	}
+    @Column(length = 1000000)
+    private String html;
 
-	public void setLabID(int labID) {
-		this.labID = labID;
-	}
+    private int cateID;
 
-	public int getCateID() {
-		return cateID;
-	}
+    public int getLabID() {
+        return labID;
+    }
 
-	public void setCateID(int cateID) {
-		this.cateID = cateID;
-	}
+    public void setLabID(int labID) {
+        this.labID = labID;
+    }
 
-	public String getHtml() {
-		return html;
-	}
+    public int getCateID() {
+        return cateID;
+    }
 
-	public void setHtml(String html) {
-		this.html = html;
-	}
+    public void setCateID(int cateID) {
+        this.cateID = cateID;
+    }
 
-	public Lab() {
+    public String getHtml() {
+        return html;
+    }
 
-	}
+    public void setHtml(String html) {
+        this.html = html;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public Lab() {
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    }
 
-	public Lab(String docID, String name) {
-		this.docID = docID;
-		this.name = name;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getDocID() {
-		return docID;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setDocID(String docID) {
-		this.docID = docID;
-	}
+    public Lab(String docID, String name) {
+        this.docID = docID;
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getDocID() {
+        return docID;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setDocID(String docID) {
+        this.docID = docID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

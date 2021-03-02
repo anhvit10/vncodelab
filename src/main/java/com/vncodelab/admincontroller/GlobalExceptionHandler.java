@@ -1,12 +1,13 @@
 //
 package com.vncodelab.admincontroller;
 
+import com.vncodelab.exception.PageNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 /**
  * This class is .
- * 
+ *
  * @Description: .
  * @author: NVAnh
  * @create_date: Oct 26, 2020
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
-	
-	@ExceptionHandler(value = NumberFormatException.class)
-	public String handleNumberFormatException() {
-		return "index";
-	}
+
+    @ExceptionHandler({PageNotFoundException.class})
+    public String handlePageNotFoundException() {
+        return "redirect:/404";
+    }
 }

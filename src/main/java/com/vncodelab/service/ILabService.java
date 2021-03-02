@@ -1,15 +1,14 @@
 //
 package com.vncodelab.service;
 
-import org.springframework.data.domain.Page;
-
 import com.vncodelab.entity.Lab;
+import com.vncodelab.exception.PageNotFoundException;
 
 import java.util.List;
 
 /**
  * This class is .
- * 
+ *
  * @Description: .
  * @author: NVAnh
  * @create_date: Feb 18, 2021
@@ -19,11 +18,11 @@ import java.util.List;
  */
 public interface ILabService {
 
-	void saveLab(Lab lab, String labId);
+    void saveLab(Lab lab, String labId) throws PageNotFoundException;
 
-	void deleteLab(Integer labID) throws Exception;
-	
-	Lab getLabById(Integer labID) throws Exception;
+    void deleteLab(Integer labID) throws PageNotFoundException;
 
-	List<Lab> getAllLabs();
+    Lab getLabById(Integer labID) throws PageNotFoundException;
+
+    List<Lab> getAllLabs();
 }

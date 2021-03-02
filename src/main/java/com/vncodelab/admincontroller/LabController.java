@@ -1,24 +1,17 @@
 //
 package com.vncodelab.admincontroller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.vncodelab.constants.CommonConstants;
 import com.vncodelab.entity.Cate;
 import com.vncodelab.entity.Lab;
+import com.vncodelab.exception.PageNotFoundException;
 import com.vncodelab.service.serviceImpl.CateServiceImpl;
 import com.vncodelab.service.serviceImpl.LabServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * This class is .
@@ -56,19 +49,19 @@ public class LabController {
     }
 
     @PostMapping(value = "/laboratory/save")
-    public String saveLab(@RequestParam("labId") String labId, @ModelAttribute("newLaboratory") Lab lab) {
+    public String saveLab(@RequestParam("labId") String labId, @ModelAttribute("newLaboratory") Lab lab) throws PageNotFoundException {
         labServiceImpl.saveLab(lab, labId);
         return "redirect:/admin/laboratory";
     }
 
     @GetMapping(value = "/laboratory/delete/{labID}")
-    public String deleteLab(@PathVariable("labID") String labID) throws Exception {
+    public String deleteLab(@PathVariable("labID") String labID) throws PageNotFoundException {
         labServiceImpl.deleteLab(Integer.parseInt(labID));
         return "redirect:/admin/laboratory";
     }
 
     @GetMapping(value = "/laboratory/{labID}")
-    public String toEditLabPage(Model model, @PathVariable("labID") String labID) throws Exception {
+    public String toEditLabPage(Model model, @PathVariable("labID") String labID) throws PageNotFoundException {
         Lab lab = labServiceImpl.getLabById(Integer.parseInt(labID));
         List<Cate> allCate = cateServiceImpl.findAllCate();
         model.addAttribute("allCate", allCate);
