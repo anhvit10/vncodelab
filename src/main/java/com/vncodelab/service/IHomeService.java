@@ -1,15 +1,15 @@
 //
 package com.vncodelab.service;
 
+import com.vncodelab.entity.Home;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import com.vncodelab.entity.Home;
-
 /**
  * This class is .
- * 
+ *
  * @Description: .
  * @author: NVAnh
  * @create_date: Feb 19, 2021
@@ -19,9 +19,9 @@ import com.vncodelab.entity.Home;
  */
 public interface IHomeService {
 
-	Map<String, Object> getObjectFirebase() throws InterruptedException, ExecutionException;
+    Map<String, Object> getObjectFirebase() throws InterruptedException, ExecutionException;
 
-	Home getInforFirebase(Map<String, Object> objectFirebase);
+    Home getInforFirebase(Map<String, Object> objectFirebase);
 
-	void saveObjectFirebase(Home home) throws IOException;
+    void saveObjectFirebase(Home home) throws IOException;
 }
