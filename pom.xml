@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.jquiz</groupId>
     <artifactId>ROOT</artifactId>
-    <version>1.0.0</version>
+    <version>1</version>
     <packaging>war</packaging>
     <name>VnCodelab</name>
 

@@ -21,16 +21,15 @@ $(function () {
             .signInWithPopup(provider)
             .then((result) => {
                 currentUser = user;
-                afterLogin(result.user);
                 presence(result.user)
+                afterLogin(result.user);
             }).catch((error) => {
         });
     });
     $('#signout').click(function (e) {
         logOut();
     })
-    $(".user").hide();
-    $(".teacher").hide();
+
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             currentUser = user;
@@ -45,7 +44,7 @@ $(function () {
 
 function logOut() {
     firebase.auth().signOut().then(() => {
-        $('.user').hide()
+        $('.user').addClass("d-none");
         $('#btnLogin').click(function (e) {
             openLoginModal();
         });
@@ -67,7 +66,7 @@ function logOut() {
 }
 
 function afterLogin(user) {
-    $(".user").show();
+    $(".user").removeClass("d-none")
     $('#loginModal').modal('hide')
     $('#btnLogin').addClass("d-none")
     if (user.photoURL) {
@@ -83,7 +82,8 @@ function afterLogin(user) {
     $('#profileName').text(user.displayName)
     $('#profileEmail').text(user.email)
     if (page === "lab")
-        enterRoom();
+        enterLab(user);
+
 }
 
 function showRegisterForm() {
@@ -175,10 +175,12 @@ function presence(user) {
     var isOfflineForDatabase = {
         state: 'offline',
         last_changed: firebase.database.ServerValue.TIMESTAMP,
+        uname: user.displayName
     };
     var isOnlineForDatabase = {
         state: 'online',
         last_changed: firebase.database.ServerValue.TIMESTAMP,
+        uname: user.displayName
     };
     firebase.database().ref('.info/connected').on('value', function (snapshot) {
         if (snapshot.val() == false)

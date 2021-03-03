@@ -18,45 +18,30 @@
 <body>
 
 
-<google-codelab codelab-gaid=""
-                th:id="${lab.name}"
-                title="Title"
-                environment="web"
-                feedback-link="">
-
+<google-codelab codelab-gaid="" th:id="${lab.name}" title="Title" environment="web" feedback-link="">
     <div th:utext="${lab.html}"></div>
-
 </google-codelab>
-<!--<google-codelab codelab-gaid=""-->
-<!--                id="title"-->
-<!--                title="Title"-->
-<!--                environment="web"-->
-<!--                feedback-link="">-->
-
-<!--    <google-codelab-step label="Heading 1" duration="0">-->
-<!--    </google-codelab-step>-->
-
-<!--    <google-codelab-step label="Cài đặt Claat" duration="0">-->
-
-<!--    </google-codelab-step>-->
-
-<!--    <google-codelab-step label="Tạo ra trang landing page" duration="0">-->
-
-<!--    </google-codelab-step>-->
-
+<!--<google-codelab codelab-gaid="" id="title" title="Title" environment="web" feedback-link="">-->
+<!--    <google-codelab-step label="Step 1" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 2" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 3" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 4" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 5" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 6" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 7" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 8" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 9" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 10" duration="0"></google-codelab-step>-->
+<!--    <google-codelab-step label="Step 11" duration="0"></google-codelab-step>-->
 <!--</google-codelab>-->
-<div id="divtoshow" style="position: fixed;display:none;z-index: 2000" class="speech-bubble"></div>
+
+<div id="divtoshow" style="display: none; z-index: 2000" class="speech-bubble">Noi dung ben trong</div>
 <!--TOP BUTTON-->
 <div id="topButton">
     <!--Profile Button-->
-    <img class="ms-2 rounded-circle user p-1 profilePicture" width="41px" height="41px" data-bs-toggle="collapse" data-bs-target="#collapse-profile">
-    <div class="ms-2 userName user" data-bs-toggle="collapse" data-bs-target="#collapse-profile"></div>
+    <img class="ms-2 rounded-circle user d-none p-1 profilePicture" width="41px" height="41px" data-bs-toggle="collapse" data-bs-target="#collapse-profile">
+    <div class="ms-2 userName user d-none" data-bs-toggle="collapse" data-bs-target="#collapse-profile"></div>
     <button id="btnLogin" type="button" class="btn btn-primary d-none">Đăng nhập</button>
-
-
-    <!--    <img class="rounded-circle d-none" width="40px" height="40px" id="profilePicture" data-bs-toggle="collapse" data-bs-target="#collapse-profile">-->
-    <!--    <button id="btnLogin" type="button" class="btn btn-primary d-none">Đăng nhập</button>-->
-
     <!--Room button-->
     <button id="btnRoom" type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#collapse-online">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
@@ -121,6 +106,7 @@
                                 <i class="bi bi-twitter"></i>
                             </a>
                         </div>
+
                         <div class="division">
                             <div class="line l"></div>
                             <span>hoặc</span>
@@ -200,16 +186,16 @@
         </div>
 
         <!-- Typing area -->
-        <form action="#" class="bg-light input-group">
+        <div class="bg-light input-group">
 
             <input id="txtMessage" type="text" autocomplete="off" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 bg-light">
             <div class="input-group-append">
-                <button id="button-addon2" type="submit" class="btn btn-link" onclick="sendMessage()">
+                <button id="button-addon2" class="btn btn-link" onclick="sendMessage()">
                     <img width="30px" height="30px" src="../static/images/send-button.svg" th:src="@{/images/send-button.svg}"/>
                 </button>
             </div>
 
-        </form>
+        </div>
 
     </div>
 </div>

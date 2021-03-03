@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @Controller
@@ -89,12 +90,13 @@ public class MainController {
         return "done";
     }
 
-    @GetMapping("/lab/{docID}")
-    public String lab(Model model, @PathVariable(name = "docID") String docID) {
-        Lab lab = labRespository.findByDocID(docID);
-        model.addAttribute("lab", lab);
+    @GetMapping("/lab/{labID}")
+    public String lab(Model model, @PathVariable(name = "labID") int labID) {
+        Optional<Lab> optional = labRespository.findById(labID);
+        model.addAttribute("lab", optional.get());
         return "lab";
     }
+
 
     @GetMapping("/")
     public String index(Model model) throws InterruptedException, ExecutionException {
