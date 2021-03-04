@@ -44,7 +44,7 @@ public class MainController {
         if (lab == null)
             lab = newLab;
 
-        Process p = Runtime.getRuntime().exec("/Users/xuanlam/go/bin/claat export " + newLab.getDocID());
+        Process p = Runtime.getRuntime().exec("~/bin/claat export " + newLab.getDocID());
         BufferedReader input = new BufferedReader(new InputStreamReader(p.getErrorStream()));
         String line = input.readLine();
         p.waitFor();
