@@ -39,9 +39,7 @@ public class LabServiceImpl implements ILabService {
             labRespository.save(lab);
         } else {
             Optional<Lab> oldLab = labRespository.findById(Integer.parseInt(labId));
-            if (oldLab.isEmpty()) {
-                throw new PageNotFoundException();
-            }
+
             oldLab.get().setLabID(Integer.parseInt(labId));
             oldLab.get().setName(lab.getName());
             oldLab.get().setDescription(lab.getDescription());
@@ -54,19 +52,14 @@ public class LabServiceImpl implements ILabService {
     @Override
     public void deleteLab(Integer labID) throws PageNotFoundException {
         Optional<Lab> lab = labRespository.findById(labID);
-        if (lab.isEmpty()) {
-            throw new PageNotFoundException();
-        } else {
-            labRespository.deleteById(labID);
-        }
+
+        labRespository.deleteById(labID);
+
     }
 
     @Override
     public Lab getLabById(Integer labID) throws PageNotFoundException {
         Optional<Lab> lab = labRespository.findById(labID);
-        if (lab.isEmpty()) {
-            throw new PageNotFoundException();
-        }
         return lab.get();
     }
 }

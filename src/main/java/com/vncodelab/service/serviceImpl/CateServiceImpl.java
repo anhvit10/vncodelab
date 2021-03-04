@@ -39,9 +39,7 @@ public class CateServiceImpl implements ICateService {
             cateRespository.save(cate);
         } else {
             Optional<Cate> oldCate = cateRespository.findByCateID(Integer.parseInt(cateId));
-            if (oldCate.isEmpty()) {
-                throw new PageNotFoundException();
-            }
+
             oldCate.get().setCateID(Integer.parseInt(cateId));
             oldCate.get().setName(cate.getName());
             oldCate.get().setDescription(cate.getDescription());
@@ -53,19 +51,15 @@ public class CateServiceImpl implements ICateService {
     @Override
     public void deleteCate(Integer cateID) throws PageNotFoundException {
         Optional<Cate> cate = cateRespository.findByCateID(cateID);
-        if (cate.isEmpty()) {
-            throw new PageNotFoundException();
-        } else {
+
             cateRespository.deleteById(cateID);
-        }
+
     }
 
     @Override
     public Cate getCateById(Integer cateID) throws PageNotFoundException {
         Optional<Cate> cate = cateRespository.findByCateID(cateID);
-        if (cate.isEmpty()) {
-            throw new PageNotFoundException();
-        }
+
         return cate.get();
     }
 
