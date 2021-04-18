@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -49,7 +50,13 @@ public class LabController {
     }
 
     @PostMapping(value = "/laboratory/save")
-    public String saveLab(@RequestParam("labId") String labId, @ModelAttribute("newLaboratory") Lab lab) throws PageNotFoundException {
+    public String saveLab(@RequestParam("labId") String labId,
+                          @ModelAttribute("newLaboratory") Lab lab,
+                          @RequestParam(value = "image", required = false) MultipartFile exerciseFile) throws PageNotFoundException {
+
+        if(!exerciseFile.isEmpty()) {
+            labServiceImpl.saveExerciseToFirebase(exerciseFile);
+        }
         labServiceImpl.saveLab(lab, labId);
         return "redirect:/admin/laboratory";
     }

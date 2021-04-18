@@ -17,5 +17,7 @@ public interface LabRespository extends JpaRepository<Lab, Integer> {
 
     List<Lab> findAllByCateID(int cateID);
 
-    Page<Lab> findAll(Pageable pageable);
+    List<Lab> findAllByNameContains(String keyword);
+
+    List<Lab> findAll();
 }

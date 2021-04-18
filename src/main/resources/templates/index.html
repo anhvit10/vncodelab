@@ -98,7 +98,9 @@
                         </paper-icon-button>
                         <div class="label-and-input-container style-scope paper-input-container"
                              id="labelAndInputContainer">
-                            <input is="iron-input">
+                            <form th:action="@{/}" method="get">
+                            <input type="text" name="sk" th:value="${param.sk}" is="iron-input" placeholder="Enter lab name ...">
+                            </form>
                         </div>
                     </div>
                 </paper-input-container>
@@ -144,7 +146,7 @@
                 </div>
                 <card-sorter id="cards" class="site-width">
 
-                    <a th:each="lab : ${labList}" th:href="@{/lab/{path}(path=*{lab.getLabID()})}"
+                    <a th:each="lab : ${labList}" th:href="@{/lab/{path}(path=*{lab.getLabID()},room=*{lab.docID})}"
                        class="codelab-card category-web">
                         <h2 th:text="*{lab.getName()}"></h2>
                         <h3 th:text="*{lab.getDescription()}"></h3>

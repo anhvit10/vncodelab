@@ -373,7 +373,7 @@
 
                 <!-- DataTales Example -->
                 <form th:action="@{save}" th:object="${newLaboratory}"
-                      method="POST" class="job-post-form">
+                      method="POST" class="job-post-form" enctype="multipart/form-data">
                     <div class="basic-info-input">
                         <h4>
                             <i data-feather="plus-circle"></i>Post A Laboratory
@@ -433,6 +433,12 @@
                                     <option th:each="cate : ${allCate}"
                                             th:value="${cate.cateID}" th:text="${cate.name}"></option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">File</label>
+                            <div class="col-md-9">
+                                <input type="file" name="image"/>
                             </div>
                         </div>
                     </div>
