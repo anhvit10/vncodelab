@@ -51,12 +51,7 @@ public class LabController {
 
     @PostMapping(value = "/laboratory/save")
     public String saveLab(@RequestParam("labId") String labId,
-                          @ModelAttribute("newLaboratory") Lab lab,
-                          @RequestParam(value = "image", required = false) MultipartFile exerciseFile) throws PageNotFoundException {
-
-        if(!exerciseFile.isEmpty()) {
-            labServiceImpl.saveExerciseToFirebase(exerciseFile);
-        }
+                          @ModelAttribute("newLaboratory") Lab lab) throws PageNotFoundException {
         labServiceImpl.saveLab(lab, labId);
         return "redirect:/admin/laboratory";
     }

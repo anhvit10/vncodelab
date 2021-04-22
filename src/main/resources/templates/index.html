@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link href="../static/css/chat.css" th:href="@{/css/chat.css}" rel="stylesheet"/>
 
-    <link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}"
+    <link th:href="@{/css/bootstrap.css}"
           rel="stylesheet"/>
     <link href="../static/css/main.css" th:href="@{/css/main.css}"
           rel="stylesheet"/>
@@ -135,12 +135,11 @@
                         </paper-tabs>
                     </div>
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenuButton"
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> More
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a th:each="cate : ${cateListMore}" class="dropdown-item" th:href="@{/cate/{path}(path=*{cate.getCateID()})}"><span
-                                    th:text="*{cate.getName()}"></span></a>
+                            <a th:each="cate : ${cateListMore}" class="dropdown-item" th:href="@{/cate/{path}(path=*{cate.cateID})}" th:text="${cate.name}"></a>
                         </div>
                     </div>
                 </div>
@@ -316,6 +315,9 @@
 <script type="text/javascript" src="../static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
 <script type="text/javascript" src="../static/js/my.js" th:src="@{/js/my.js}"></script>
 <script type="text/javascript" src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+<script type="text/javascript" src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
 </body>
 </html>

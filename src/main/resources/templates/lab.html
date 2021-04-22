@@ -177,7 +177,11 @@
                 </div>
             </div>
         </div>
-
+        <form id="file-upload-form">
+            <input id="description" type="text" name="description"/>
+            <input id="fileupload" type="file" name="fileupload"/>
+            <button id="upload-button" type="button" onclick="uploadFile()"> Upload </button>
+        </form>
     </div>
     <!-- Chat Box-->
     <div class="col-8 px-0 main-chat">
@@ -212,6 +216,24 @@
 
     </div>
 </div>
+
+<script>
+    async function uploadFile() {
+        var description = document.getElementById("description").value;
+        var labID = getLabID();
+        let formData = new FormData();
+        formData.append("file", fileupload.files[0]);
+        formData.append("description", description);
+        formData.append("labId", labID);
+        let response = await fetch('/upload', {
+            method: "POST",
+            body: formData
+        });
+        if (response.status == 200) {
+            alert("File successfully uploaded.");
+        }
+    }
+</script>
 
 <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
 <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>

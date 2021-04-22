@@ -68,8 +68,4 @@ public class LabServiceImpl implements ILabService {
         Object[] lab = firebaseService.getFromFirebase(labID, "lab");
         return (Lab) lab[0];
     }
-
-    public void saveExerciseToFirebase(MultipartFile multipartFile) {
-        firebaseService.saveFileToFirebase(multipartFile);
-    }
 }

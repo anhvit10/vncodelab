@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -95,7 +97,7 @@ public class FirebaseService {
         ref.setValueAsync(null);
     }
 
-    public void saveFileToFirebase(MultipartFile multipartFile) {
+    public String saveFileToFirebase(MultipartFile multipartFile, Integer labId, LocalDateTime localDateTime, String description) {
         final StorageClient storageClient = StorageClient.getInstance();
         InputStream file = null;
         try {
@@ -103,8 +105,11 @@ public class FirebaseService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String blobString = "testUpload/" + multipartFile.getOriginalFilename();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String submitTime = localDateTime.format(format);
+        String blobString = "exercise/" + submitTime +"/lab"+ labId +"/"+ description+"/"+ multipartFile.getOriginalFilename();
         Blob blob = storageClient.bucket().create(blobString, file);
-        String url = blob.signUrl(1000, TimeUnit.DAYS).toString();
+        String url = blob.signUrl(100, TimeUnit.DAYS).toString();
+        return url;
     }
 }
