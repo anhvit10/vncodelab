@@ -18,7 +18,7 @@
 <body>
 
 
-<google-codelab codelab-gaid="" th:id="${lab.name}" title="Title" environment="web" feedback-link="">
+<google-codelab codelab-gaid="" th:id="${lab.name}" th:attr="title=${lab.description}" environment="web" feedback-link="">
     <div th:utext="${lab.html}"></div>
 </google-codelab>
 <!--<google-codelab codelab-gaid="" id="title" title="Title" environment="web" feedback-link="">-->

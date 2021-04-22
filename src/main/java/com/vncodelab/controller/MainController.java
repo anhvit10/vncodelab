@@ -1,15 +1,14 @@
 package com.vncodelab.controller;
 
 import com.google.gson.Gson;
-import com.vncodelab.entity.Cate;
 import com.vncodelab.entity.Home;
 import com.vncodelab.entity.Lab;
 import com.vncodelab.json.LabInfo;
 import com.vncodelab.model.AjaxResponseBody;
 import com.vncodelab.respository.CateRespository;
 import com.vncodelab.respository.LabRespository;
+import com.vncodelab.service.serviceImpl.FirebaseService;
 import com.vncodelab.service.serviceImpl.HomeServiceImpl;
-import com.vncodelab.service.serviceImpl.LabServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @Controller
@@ -34,7 +32,7 @@ public class MainController {
     private HomeServiceImpl homeServiceImpl;
 
     @Autowired
-    private LabServiceImpl labService;
+    private FirebaseService firebaseService;
 
     @PostMapping("/save")
     public ResponseEntity<?> save(@RequestBody Lab newLab) throws IOException, InterruptedException {
@@ -68,32 +66,14 @@ public class MainController {
 
 
         labRespository.save(lab);
-        labService.saveLabToFirebase(lab);
+        firebaseService.saveToFirebase(lab, null, "lab");
         return ResponseEntity.ok().body(ajaxResponseBody);
-    }
-
-    @GetMapping("/createCate")
-    public String createCate() {
-        cateRespository.save(new Cate("Java", ""));
-        cateRespository.save(new Cate("Swing", ""));
-        cateRespository.save(new Cate("JSP", ""));
-        cateRespository.save(new Cate("Servlet", ""));
-        cateRespository.save(new Cate("JPA", ""));
-        cateRespository.save(new Cate("Hibernate", ""));
-        cateRespository.save(new Cate("Spring", ""));
-        cateRespository.save(new Cate("Android", ""));
-
-        cateRespository.save(new Cate("C", "", 1));
-        cateRespository.save(new Cate("C++", "", 1));
-        cateRespository.save(new Cate("PHP", "", 1));
-        cateRespository.save(new Cate("JavaScript", "", 1));
-        return "done";
     }
 
     @GetMapping("/lab/{labID}")
     public String lab(Model model, @PathVariable(name = "labID") int labID) {
-        Optional<Lab> optional = labRespository.findById(labID);
-        model.addAttribute("lab", optional.get());
+        Lab[] lab = (Lab[]) firebaseService.getFromFirebase(labID, "lab");
+        model.addAttribute("lab", lab[0]);
         return "lab";
     }
 
@@ -127,10 +107,5 @@ public class MainController {
         model.addAttribute("cateList", cateRespository.findAllByType(0));
         model.addAttribute("cateListMore", cateRespository.findAllByType(1));
 
-    }
-
-    @GetMapping("/test")
-    public String test() {
-        return "test";
     }
 }

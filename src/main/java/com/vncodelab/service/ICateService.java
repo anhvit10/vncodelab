@@ -18,8 +18,6 @@ import java.util.List;
  */
 public interface ICateService {
 
-    List<Cate> findAllCate();
-
     void saveCate(Cate cate, String cateId) throws PageNotFoundException;
 
     void deleteCate(Integer cateID) throws PageNotFoundException;

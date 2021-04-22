@@ -43,7 +43,7 @@ public class LabController {
 
     @GetMapping(value = "/laboratory/new")
     public String toSaveLabPage(Model model) {
-        List<Cate> allCate = cateServiceImpl.findAllCate();
+        List<Cate> allCate = cateServiceImpl.getAllCates();
         model.addAttribute("allCate", allCate);
         model.addAttribute("newLaboratory", new Lab());
         return "admin2/save-lab";
@@ -70,7 +70,7 @@ public class LabController {
     @GetMapping(value = "/laboratory/{labID}")
     public String toEditLabPage(Model model, @PathVariable("labID") String labID) throws PageNotFoundException {
         Lab lab = labServiceImpl.getLabById(Integer.parseInt(labID));
-        List<Cate> allCate = cateServiceImpl.findAllCate();
+        List<Cate> allCate = cateServiceImpl.getAllCates();
         model.addAttribute("allCate", allCate);
         model.addAttribute("newLaboratory", lab);
         model.addAttribute("labId", lab.getLabID());
