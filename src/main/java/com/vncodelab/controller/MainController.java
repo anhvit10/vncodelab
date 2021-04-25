@@ -35,13 +35,19 @@ public class MainController {
     private FirebaseService firebaseService;
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody Lab newLab) throws IOException, InterruptedException {
-        Lab lab = labRespository.findByDocID(newLab.getDocID());
-        if (lab == null)
-            lab = newLab;
+    public ResponseEntity<?> save(@RequestParam("docID") String docID,
+                                  @RequestParam("description") String description,
+                                  @RequestParam("cateID") Integer cateID) throws IOException, InterruptedException {
+        Lab lab = labRespository.findByDocID(docID);
+        if (lab == null) {
+            lab = new Lab();
+        }
 
-        File dir = new File("D:/CodeLab");
-        Process p = Runtime.getRuntime().exec("claat export " + newLab.getDocID(), null, dir);
+        File dir = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\static\\labs");
+        if(!dir.exists()) {
+            dir.mkdir();
+        }
+        Process p = Runtime.getRuntime().exec("claat export " + docID, null, dir);
         BufferedReader input = new BufferedReader(new InputStreamReader(p.getErrorStream()));
         String line = input.readLine();
         p.waitFor();
@@ -58,11 +64,13 @@ public class MainController {
         while ((line = br.readLine()) != null) {
             totalLine = totalLine + line + "\n";
         }
+        lab.setName(description);
+        lab.setDocID(docID);
         lab.setHtml(totalLine);
-        lab.setCateID(newLab.getCateID());
-        lab.setDescription(newLab.getDescription());
+        lab.setCateID(cateID);
+        lab.setDescription(description);
         AjaxResponseBody ajaxResponseBody = new AjaxResponseBody();
-        ajaxResponseBody.setUpdate(labRespository.existsByDocID(newLab.getDocID()));
+        ajaxResponseBody.setUpdate(labRespository.existsByDocID(docID));
 
 
         labRespository.save(lab);
@@ -104,8 +112,13 @@ public class MainController {
         else {
             model.addAttribute("labList", labRespository.findAllByCateID(cateID));
         }
+        model.addAttribute("cateLists", cateRespository.findAll());
         model.addAttribute("cateList", cateRespository.findAllByType(0));
         model.addAttribute("cateListMore", cateRespository.findAllByType(1));
 
+    }
+
+    public static void main(String[] args) {
+        System.out.println(System.getProperty("user.dir"));
     }
 }

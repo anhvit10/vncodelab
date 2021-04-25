@@ -1,0 +1,147 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Giới thiệu về Spring Boot</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="gi-i-thi-u-v-spring-boot"
+                  title="Giới thiệu về Spring Boot"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="1. Spring Boot là gì ?" duration="0">
+        <p><strong>Spring Boot</strong> là một bước tiếp theo của <strong>Spring</strong>, để làm cho <strong>Spring</strong> dễ dàng hơn trong việc thiết lập và phát triển ứng dụng. Với <strong>Spring Boot</strong> các cấu hình <strong>Spring</strong> được giảm thiểu tối đa. <strong>Spring Boot</strong> hỗ trợ các bộ chứa nhúng (embedded containers) điều này cho phép các ứng dụng web có thể chạy độc lập mà không cần phải trên khai lên các <strong>Web Server</strong>.</p>
+<p class="image-container"><img style="width: 601.70px" src="img\98054fea4b6cde32.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. Tạo Spring Boot Project" duration="0">
+        <p>Trên <strong>Eclipse</strong> tạo một project sử dụng <strong>Spring Tool Suite (STS)</strong>:</p>
+<ul>
+<li><strong>File/New/Other...</strong></li>
+</ul>
+<p class="image-container"><img style="width: 490.00px" src="img\f8ec7b8720098ff7.png"></p>
+<ul>
+<li><strong>Name:</strong> HelloSpringBoot</li>
+<li><strong>Group:</strong> org.o7planning</li>
+<li><strong>Artifact:</strong> HelloSpringBoot</li>
+<li><strong>Package:</strong> org.o7planning.hellospringboot</li>
+</ul>
+<p class="image-container"><img style="width: 564.00px" src="img\b2f0b4a0c111fea.png"></p>
+<p class="image-container"><img style="width: 567.00px" src="img\bc911d80b415761c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. Spring Boot Project" duration="0">
+        <p>Project đã được tạo ra, dưới đây là cấu trúc mặc định của Project.</p>
+<p class="image-container"><img style="width: 417.00px" src="img\d1a7f1b78a0074b6.png"></p>
+<p class="image-container"><img style="width: 601.70px" src="img\2eeb4b14fc1a7a62.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. Một vài giải thích về Spring Boot" duration="0">
+        <p>Ở bước trên bạn vừa tạo ra một <strong>Spring Boot Project</strong>, hãy xem nội dung <strong><em>pom.xml</em></strong>:</p>
+<h3 is-upgraded><strong>pom.xml</strong></h3>
+<p>Có 3 điểm cần chú ý trong <strong>pom.xml</strong> (1),(2), (3) như hình minh họa dưới đây, <strong>Spring Boot</strong> giúp bạn đơn giản hơn trong việc khai báo các thư viện Spring.</p>
+<p class="image-container"><img style="width: 588.00px" src="img\42da1fd64c0ebdbe.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="5. spring-boot-starter-parent" duration="0">
+        <h3 is-upgraded><strong>spring-boot-starter-parent</strong></h3>
+<p><strong>spring-boot-starter-parent</strong> là một project sẵn có trong <strong>Spring Boot</strong>. Các thư viện phụ thuộc cơ bản đã được khai báo trong <strong>spring-boot-starter-parent</strong>, project của bạn chỉ cần thừa kế nó. Chỉ cần khai báo <strong>&lt;parent&gt;</strong> trong file <strong>pom.xml</strong> của project của bạn.</p>
+<pre><code>&lt;!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent --&gt;
+ 
+&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;2.0.0.RELEASE&lt;/version&gt;
+    &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+&lt;/parent&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="6. spring-boot-starter-web" duration="0">
+        <h3 is-upgraded><strong>spring-boot-starter-web</strong></h3>
+<p>Các <strong>&#34;Starter&#34;</strong> khác chỉ đơn giản là cung cấp phụ thuộc mà bạn có khả năng cần thiết khi phát triển một loại hình cụ thể của ứng dụng. Chẳng hạn khi bạn phát triển một ứng dụng web, bạn cần một phụ thuộc <strong>spring-boot-starter-web</strong>.</p>
+<pre><code>&lt;dependencies&gt;
+ 
+   &lt;dependency&gt;
+       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+       &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+   &lt;/dependency&gt;
+ 
+   &lt;dependency&gt;
+       &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+       &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+       &lt;scope&gt;test&lt;/scope&gt;
+   &lt;/dependency&gt;
+ 
+&lt;/dependencies&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="7. spring-boot-maven-plugin" duration="0">
+        <p><strong>spring-boot-maven-plugin</strong></p>
+<p><strong>Spring-boot-maven-plugin</strong> là plugin cung cấp các thư viện cần thiết giúp project của bạn có thể chạy trực tiếp mà không cần triển khai trên một <strong>Web Server</strong>. Nó giúp tạo ra một file <strong>jar</strong> có thể thực thi (Executable)</p>
+<pre><code>&lt;plugins&gt;
+ 
+    &lt;plugin&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+    &lt;/plugin&gt;
+ 
+        &lt;!-- ... --&gt;
+ 
+&lt;/plugins&gt;</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="8. Chạy Spring Boot Project" duration="0">
+        <p>Ở bước trên bạn đã tạo ra <strong>HelloSpringBoot</strong> project bởi <strong>Eclipse &amp; Spring Tool Suite</strong>, và chưa có bất kỳ thay đổi nào. Tất cả mọi thứ được tạo ra mặc định. Bây giờ bạn cần một vài bước để chạy ứng dụng.</p>
+<p class="image-container"><img style="width: 601.70px" src="img\b52b9908373bd810.png"></p>
+<p class="image-container"><img style="width: 542.00px" src="img\23eaeb7b5af3a0b6.png"></p>
+<p>Ứng dung <strong>HelloSpringBoot</strong> của bạn đã chạy, bạn có thể chạy thử đường dẫn:</p>
+<ul>
+<li><a href="http://localhost:8080/" target="_blank">http://localhost:8080/</a></li>
+</ul>
+<p class="image-container"><img style="width: 541.00px" src="img\796a88a67526d1bc.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
