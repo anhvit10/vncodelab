@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:include="admin2/util/header :: header">
 
 <body id="page-top">
@@ -133,6 +133,13 @@
             <a class="nav-link" th:href="@{/admin/laboratory}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Laboratories</span></a>
+        </li>
+
+        <!-- Nav Item - Exercises -->
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/admin/exercise/select}">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Exercise</span></a>
         </li>
 
         <!-- Divider -->

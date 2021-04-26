@@ -121,7 +121,7 @@
         </li>
 
         <!-- Nav Item - Categories -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" th:href="@{/admin/cate}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Categories</span></a>
@@ -135,7 +135,7 @@
         </li>
 
         <!-- Nav Item - Exercises -->
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" th:href="@{/admin/exercise/select}">
                 <i class="fas fa-fw fa-table"></i>
                 <span>Exercise</span></a>
@@ -383,46 +383,38 @@
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
                     </div>
-                    <div class="card-header py-3">
-                        <button type="button" class="btn btn-success"><a th:href="@{cate/new}"><i
-                                class="fas fa-plus"></i> New Category</a></button>
-                    </div>
+<!--                    <div class="card-header py-3">-->
+<!--                        <button type="button" class="btn btn-success"><a th:href="@{laboratory/new}"><i-->
+<!--                                class="fas fa-plus"></i> New Laboratory</a></button>-->
+<!--                    </div>-->
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="width:250px;table-layout:fixed;">
                                 <thead>
-                                <tr>
-                                    <th>Cate ID</th>
-                                    <th>Cate Name</th>
-                                    <th>Description</th>
-                                    <th>Type</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                <tr style="height:1em;">
+                                    <th>Document ID</th>
+                                    <th>Document Name</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
-                                <tr>
-                                    <th>Cate ID</th>
-                                    <th>Cate Name</th>
-                                    <th>Description</th>
-                                    <th>Type</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                <tr style="height:1em;">
+                                    <th>Document ID</th>
+                                    <th>Document Name</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
-                                <tr th:each="cate : ${pageCate}">
-                                    <td th:text="${cate.cateID}"></td>
-                                    <td th:text="${cate.name}"></td>
-                                    <td th:text="${cate.description}"></td>
-                                    <td th:text="${cate.type}"></td>
-                                    <td class="action"><a class="edit btn" title="Edit"
-                                                          th:href="@{'/admin/cate/' + ${cate.cateID}}"><i
-                                            class="fas fa-edit">&#xe254;</i></a></td>
-                                    <td class="action"><a class="remove btn"
-                                                          title="Delete"
-                                                          th:href="@{'/admin/cate/delete/' + ${cate.cateID}}"><i
-                                            class="fa fa-trash"></i></a></td>
+                                <tr th:each="exercise : ${exercises}">
+                                    <td th:text="${exercise.description}"></td>
+                                    <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+                                        <a th:text="${exercise.url}" th:href="${exercise.url}"></a>
+                                    </td>
+<!--                                    <td class="action"><a class="edit btn" title="Edit"-->
+<!--                                                          th:href="@{'/admin/laboratory/' + ${lab.labID}}"><i-->
+<!--                                            class="fas fa-edit">&#xe254;</i></a></td>-->
+<!--                                    <td class="action"><a class="remove btn"-->
+<!--                                                          title="Delete"-->
+<!--                                                          th:href="@{'/admin/laboratory/delete/' + ${lab.labID}}"><i-->
+<!--                                            class="fa fa-trash"></i></a></td>-->
                                 </tr>
                                 </tbody>
                             </table>

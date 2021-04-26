@@ -7,7 +7,11 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.StorageClient;
 import com.google.firebase.database.*;
 import com.vncodelab.entity.Cate;
+import com.vncodelab.entity.Exercise;
 import com.vncodelab.entity.Lab;
+import com.vncodelab.respository.ExerciseRepository;
+import com.vncodelab.respository.LabRespository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +25,12 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class FirebaseService {
+
+    @Autowired
+    private ExerciseRepository exerciseRepository;
+
+    @Autowired
+    private LabRespository labRespository;
 
     @PostConstruct
     public void initialize() {
@@ -105,11 +115,13 @@ public class FirebaseService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String submitTime = localDateTime.format(format);
         String blobString = "exercise/" + submitTime +"/lab"+ labId +"/"+ description+"/"+ multipartFile.getOriginalFilename();
         Blob blob = storageClient.bucket().create(blobString, file);
         String url = blob.signUrl(100, TimeUnit.DAYS).toString();
+        Exercise exercise = new Exercise(labRespository.findById(labId).get().getName(),submitTime,description, url);
+        exerciseRepository.save(exercise);
         return url;
     }
 }
